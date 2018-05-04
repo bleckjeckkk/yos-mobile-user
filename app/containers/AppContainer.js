@@ -10,8 +10,6 @@ import OrderStack from '../navigators/OrderStack';
 import OrderSummaryStack from '../navigators/OrderSummaryStack';
 import CartStack from '../navigators/CartStack';
 
-import Login from './LaunchScreen';
-
 const routeConfiguration = {
 	Order: { screen: OrderStack },
 	OrderSummary: { screen: OrderSummaryStack },

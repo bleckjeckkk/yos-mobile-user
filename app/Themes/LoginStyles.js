@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from '../Themes/'
+import { Metrics, ApplicationStyles } from './'
 import {
   Platform,
 } from "react-native";

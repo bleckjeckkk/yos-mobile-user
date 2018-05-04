@@ -9,17 +9,21 @@ import {
   Platform,
   StyleSheet,
   Button,
+  AppRegistry,
 } from 'react-native'
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 //import LoginButton from '../../ignite/DevScreens/LoginButton.js'
+import { connect } from 'react-redux';
 
 import { Images } from '../Themes'
 
 // Styles
-import styles from './LaunchScreenStyles'
+import styles from '../Themes/LoginStyles'
 
 const viewPadding = 10;
 
-export default class LaunchScreen extends Component {
+class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -45,7 +49,7 @@ export default class LaunchScreen extends Component {
     alert("Logged!\n"
     + "\nUsername: " + this.state.username
     + "\nPassword: " + this.state.password)
-    this.props.navigation.navigate('Main')
+    this.props.getAuthToken();
   }
 
   render () {
@@ -80,4 +84,18 @@ export default class LaunchScreen extends Component {
       </View>
     )
   }
+}
+
+
+function mapStateToProps(state) {
+	return {
+		setOrders: state.setOrders,
+	}
+}
+
+
+export default connect((state) => { return {} }, mapDispatchToProps)(Login);
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(ActionCreators, dispatch);
 }

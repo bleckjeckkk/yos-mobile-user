@@ -25,6 +25,10 @@ export function fetchOrders() {
 	}
 }
 
+export function getAuthToken() {
+	console.log("LOGIN WAS PRESSED");
+}
+
 export function fetchEmployeeCarts(carts) {
 	return (dispatch, getState) => {
 		return Api.post('order-carts-api/', JSON.stringify({carts: carts}))
