@@ -27,8 +27,8 @@ class Login extends Component {
     super(props);
     this.state = {
       //TODO: CHANGE THIS BACK
-      username: 'Test',
-      password: '',
+      username: 'RYB',
+      password: 'RYB',
     }
   }
 
