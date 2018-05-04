@@ -13,7 +13,6 @@ import {
 } from 'react-native'
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-//import LoginButton from '../../ignite/DevScreens/LoginButton.js'
 import { connect } from 'react-redux';
 
 import { Images } from '../Themes'
@@ -49,7 +48,11 @@ class Login extends Component {
     alert("Logged!\n"
     + "\nUsername: " + this.state.username
     + "\nPassword: " + this.state.password)
-    this.props.getAuthToken();
+    userData = {
+      username : this.state.username,
+      password : this.state.password,
+    }
+    this.props.getAuthToken(userData);
   }
 
   render () {

@@ -25,8 +25,10 @@ export function fetchOrders() {
 	}
 }
 
-export function getAuthToken() {
+export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
+	alert(data.username + " " + data.password);
+	console.log(data);
 }
 
 export function fetchEmployeeCarts(carts) {
