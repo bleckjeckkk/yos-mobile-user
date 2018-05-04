@@ -34,7 +34,7 @@ export function getAuthToken(data) {
 			console.log("authenticated! token: " + response.token);
 		})
 		.catch((ex) => {
-			console.log(ex);
+			console.log("!!!" + ex);
 		})
 	}
 }
