@@ -4,8 +4,8 @@ import { List, ListItem, Button, Card } from 'react-native-elements';
 import api from '../../../utilities/api'
 
 export default class Menu extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
 			menuDataSource: ds,
@@ -36,11 +36,22 @@ export default class Menu extends Component {
 		)
 	}
 
+	onLogout(){
+		//TODO: de-authenticate
+		alert("Logout");
+		//TODO: logout
+	}
+
 	render() {
 		return (
-			<List containerStyle={{marginBottom: 20}}>
-				<ListView dataSource={this.state.menuDataSource} renderRow={this.renderRow.bind(this)}/>
-			</List>
+			<View>
+				<List containerStyle={{marginBottom: 20}}>
+					<ListView dataSource={this.state.menuDataSource} renderRow={this.renderRow.bind(this)}/>
+				</List>
+				<Button 
+					title="Log Out"
+					onPress={this.onLogout.bind(this)}/>
+			</View>
 		);
 	}
 }

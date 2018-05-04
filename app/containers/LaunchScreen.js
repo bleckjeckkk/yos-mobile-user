@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 //import LoginButton from '../../ignite/DevScreens/LoginButton.js'
 
-//import { Images } from '../Themes'
+import { Images } from '../Themes'
 
 // Styles
 import styles from './LaunchScreenStyles'
@@ -53,7 +53,7 @@ export default class LaunchScreen extends Component {
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
-            {/*<Image source={Images.logo} style={styles.logo} />*/}
+            <Image source={Images.logo} style={styles.logo} />
             <Text> Logo Here </Text>
           </View>
           <Text style={styles.sectionTitleLogin}> Welcome! </Text>
