@@ -29,8 +29,11 @@ export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
 	console.log(data);
 	return (dispatch, getState) => {
-		return Api.post('api-token-auth/',JSON.stringify({data:data}))
-		.then((response) => console.log(JSON.parse(response)))
+		return Api.post('api-token-auth/', {data:data})
+		.then((response) => console.log(response))
+		.catch((ex) => {
+			console.log(ex);
+		})
 	}
 }
 
