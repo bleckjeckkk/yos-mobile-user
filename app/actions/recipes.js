@@ -30,7 +30,9 @@ export function getAuthToken(data) {
 	console.log(data);
 	return (dispatch, getState) => {
 		return Api.post('api-token-auth/', data)
-		.then((response) => console.log(response))
+		.then((response) => {
+			console.log("authenticated! token: " + response.token);
+		})
 		.catch((ex) => {
 			console.log(ex);
 		})
