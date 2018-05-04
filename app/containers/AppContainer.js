@@ -35,8 +35,15 @@ class AppContainer extends Component {
 	}
 }
 
-export default connect((state) => { return {} }, mapDispatchToProps)(AppContainer);
+
+function mapStateToProps(state) {
+	return {
+		token: state.Token,
+	}
+}
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

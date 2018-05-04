@@ -6,8 +6,8 @@ import Swipeout from 'react-native-swipeout';
 import api from '../../../utilities/api';
 
 class Cart extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			carts: []
 		}
@@ -68,7 +68,8 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
 	return {
-		setEmployeeCarts: state.setEmployeeCarts
+		setEmployeeCarts: state.setEmployeeCarts,
+		token : state.Token
 	}
 }
 

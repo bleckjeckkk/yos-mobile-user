@@ -48,6 +48,7 @@ export default class Menu extends Component {
 				<List containerStyle={{marginBottom: 20}}>
 					<ListView dataSource={this.state.menuDataSource} renderRow={this.renderRow.bind(this)}/>
 				</List>
+				<Text>Token: {this.props.screenProps.token} </Text>
 				<Button 
 					title="Log Out"
 					onPress={this.onLogout.bind(this)}/>

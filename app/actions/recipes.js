@@ -27,14 +27,15 @@ export function fetchOrders() {
 
 export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
-	console.log(data);
 	return (dispatch, getState) => {
 		return Api.post('api-token-auth/', data)
 		.then((response) => {
 			console.log("authenticated! token: " + response.token);
+			dispatch(setToken({ token : response.token }));
 		})
 		.catch((ex) => {
-			console.log("!!!" + ex);
+			alert("Incorrect username/password!");
+			console.log("!!!" + JSON.stringify(ex));
 		})
 	}
 }
@@ -85,6 +86,19 @@ export function completeOrderDetail(orderDetailId) {
 		.catch((ex) => {
 			console.log(ex);
 		})	
+	}
+}
+
+export function setToken( { token } ) {
+	return {
+		type: types.SET_TOKEN,
+		token
+	}
+}
+
+export function resetToken() {
+	return {
+		type: types.RESET_TOKEN
 	}
 }
 

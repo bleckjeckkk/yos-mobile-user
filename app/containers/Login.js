@@ -27,8 +27,8 @@ class Login extends Component {
     super(props);
     this.state = {
       //TODO: CHANGE THIS BACK
-      username: 'RYB',
-      password: 'RYB',
+      username: '',
+      password: '',
     }
   }
 
@@ -45,14 +45,12 @@ class Login extends Component {
   }
   
   onSubmit(){
-    alert("Logged!\n"
-    + "\nUsername: " + this.state.username
-    + "\nPassword: " + this.state.password)
-    userData = {
-      username : this.state.username,
-      password : this.state.password,
-    }
-    this.props.getAuthToken(userData);
+    this.props.getAuthToken(this.state);
+  }
+
+  componentWillReceiveProps(){
+    console.log("props");
+    this.props.navigation.navigate('Main');    
   }
 
   render () {
@@ -61,10 +59,11 @@ class Login extends Component {
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Image source={Images.logo} style={styles.logo} />
-            <Text> Logo Here </Text>
+            <Text> {JSON.stringify(this.props.token)} </Text>
           </View>
           <Text style={styles.sectionTitleLogin}> Welcome! </Text>
           <View style={styles.section} >
+
             <Text style={styles.sectionLogin}>User</Text>
             <TextInput 
               placeholder='username'
@@ -72,6 +71,7 @@ class Login extends Component {
               value={this.state.username}
               onChangeText={(value) => this.onChangeName(value)}
             />
+
             <Text style={styles.sectionLogin}>Password</Text>
             <TextInput 
               placeholder='password'
@@ -79,6 +79,7 @@ class Login extends Component {
               secureTextEntry = {true}
               onChangeText={(value) => this.onChangePassword(value)}
             />
+
           </View>
           <Button 
             title="Log-in"
@@ -92,13 +93,12 @@ class Login extends Component {
 
 function mapStateToProps(state) {
 	return {
-		setOrders: state.setOrders,
+		token: state.Token,
 	}
 }
-
-
-export default connect((state) => { return {} }, mapDispatchToProps)(Login);
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(ActionCreators, dispatch);
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
