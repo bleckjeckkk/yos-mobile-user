@@ -27,8 +27,11 @@ export function fetchOrders() {
 
 export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
-	alert(data.username + " " + data.password);
 	console.log(data);
+	return (dispatch, getState) => {
+		return Api.post('api-token-auth/',JSON.stringify({data:data}))
+		.then((response) => console.log(JSON.parse(response)))
+	}
 }
 
 export function fetchEmployeeCarts(carts) {
