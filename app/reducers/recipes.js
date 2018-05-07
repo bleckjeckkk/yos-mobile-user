@@ -72,7 +72,7 @@ export const recipeCount = createReducer(0, {
 	}
 })
 
-export const Token = createReducer({}, {
+export const Token = createReducer("", {
 	[types.SET_TOKEN](state , action){
 		console.log("SET TOKEN");
 		console.log(JSON.stringify(action.token));
