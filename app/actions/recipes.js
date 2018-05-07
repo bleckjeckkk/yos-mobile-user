@@ -29,9 +29,11 @@ export function fetchOrders(token, user) {
 	return (dispatch, getState) => {
 		console.log("FETCH ORDERS");
 		obj = {
-			Authorization : "JWT " + token,
-			user: user,
+			token : token,
+			user : user,
 		}
+		console.log(token);
+		console.log(user);
 		console.log(obj);
 		return Api.post('order-api/', obj)
 		.then((response) => {
@@ -48,7 +50,7 @@ export function getAuthToken(data) {
 	return (dispatch, getState) => {
 		return Api.post('api-token-auth/', data)
 		.then((response) => {
-			console.log("authenticated! token: " + response.token);
+			console.log("authenticated!\n" + response.token);
 			dispatch(setUser({ user : response.user }));
 			dispatch(setToken({ token : response.token }));
 		})

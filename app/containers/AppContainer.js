@@ -39,6 +39,7 @@ class AppContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		token: state.Token,
+		user : state.User,
 	}
 }
 

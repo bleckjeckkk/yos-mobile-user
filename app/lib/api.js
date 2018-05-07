@@ -6,13 +6,14 @@
 const baseUrl = 'http://35.227.88.229:9000/api/v1/';
 
 class Api {
-	static headers() {
+	static headers(token) {
 		return {
 			'Accept': 'application/json',
+			'Authorization' : 'jwt ' + token,
 			'Content-type': 'application/json',
 			'dataType': 'json',
 			'X-Requested-With': 'XMLHttpRequest',
-			'X-Mashape-Key': 'KEY'
+			'X-Mashape-Key': 'KEY',
 		}
 	}
 
@@ -36,7 +37,7 @@ class Api {
 		const host = baseUrl
 		const url = `${host}${route}`
 		let options = Object.assign({method: verb}, params ? {body: JSON.stringify(params)} : null);
-		options.headers = Api.headers()
+		params.token ? options.headers = Api.headers(params.token) : options.headers = Api.headers(null)
 		return fetch(url, options).then((resp) => {
 			let json = resp.json();
 			if(resp.ok) { return json;}

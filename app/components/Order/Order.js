@@ -17,7 +17,7 @@ class Order extends Component {
 	};
 
 	componentDidMount() {
-		this.props.screenProps.fetchOrders(this.props.token, this.props.user).then(() => {
+		this.props.screenProps.fetchOrders(this.props.screenProps.token, this.props.screenProps.user).then(() => {
 			return this.orders()
 		}).then((orders) => {
 			this.setState({orders: this.state.orders.cloneWithRows(orders)})
@@ -57,8 +57,6 @@ class Order extends Component {
 function mapStateToProps(state) {
 	return {
 		setOrders: state.setOrders,
-		user : state.User,
-		token: state.Token,
 	}
 }
 export default connect(mapStateToProps)(Order);
