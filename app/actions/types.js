@@ -15,3 +15,8 @@ export const SET_EMPLOYEE_CARTS = 'SET_EMPLOYEE_CARTS'
 export const SET_TOKEN = 'SET_TOKEN'
 
 export const RESET_TOKEN = 'RESET_TOKEN'
+
+export const SET_USER = 'SET_USER'
+
+export const RESET_USER = 'RESET_USER'
+

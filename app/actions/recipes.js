@@ -32,6 +32,7 @@ export function getAuthToken(data) {
 		.then((response) => {
 			console.log("authenticated! token: " + response.token);
 			dispatch(setToken({ token : response.token }));
+			dispatch(setUser({ user : response.user }));
 		})
 		.catch((ex) => {
 			alert("Incorrect username/password!");
@@ -99,6 +100,20 @@ export function setToken( { token } ) {
 export function resetToken() {
 	return {
 		type: types.RESET_TOKEN
+	}
+}
+
+
+export function setUser( { user } ) {
+	return {
+		type: types.SET_USER,
+		user
+	}
+}
+
+export function resetUser() {
+	return {
+		type: types.RESET_USER
 	}
 }
 
