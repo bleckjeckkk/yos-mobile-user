@@ -41,6 +41,13 @@ export function getAuthToken(data) {
 	}
 }
 
+export function resetAuthToken() {
+	return (dispatch, getState) => {
+		return dispatch(resetToken());
+	}
+
+}
+
 export function fetchEmployeeCarts(carts) {
 	return (dispatch, getState) => {
 		return Api.post('order-carts-api/', JSON.stringify({carts: carts}))

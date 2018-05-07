@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
-import api from '../../../utilities/api'
+import api from '../../../utilities/api';
 
 export default class Menu extends Component {
 	constructor(props) {
@@ -36,12 +36,6 @@ export default class Menu extends Component {
 		)
 	}
 
-	onLogout(){
-		//TODO: de-authenticate
-		alert("Logout");
-		//TODO: logout
-	}
-
 	render() {
 		return (
 			<View>
@@ -49,9 +43,6 @@ export default class Menu extends Component {
 					<ListView dataSource={this.state.menuDataSource} renderRow={this.renderRow.bind(this)}/>
 				</List>
 				<Text>Token: {this.props.screenProps.token} </Text>
-				<Button 
-					title="Log Out"
-					onPress={this.onLogout.bind(this)}/>
 			</View>
 		);
 	}
