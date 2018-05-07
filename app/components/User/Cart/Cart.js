@@ -3,7 +3,7 @@ import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList } fr
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
-import api from '../../../utilities/api';
+import api from '../../../../utilities/api';
 
 class Cart extends Component {
 	constructor(props) {

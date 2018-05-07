@@ -4,16 +4,10 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { StackNavigator, TabNavigator, TabBarBottom, addNavigationHelpers } from 'react-navigation';
 
-import HomeStack from '../navigators/HomeStack';
-import MenuStack from '../navigators/MenuStack';
-import OrderStack from '../navigators/OrderStack';
-import OrderSummaryStack from '../navigators/OrderSummaryStack';
-import CartStack from '../navigators/CartStack';
+import DashStack from '../navigators/UserStack';
 
 const routeConfiguration = {
-	Order: { screen: OrderStack },
-	OrderSummary: { screen: OrderSummaryStack },
-	Menu: { screen: MenuStack },
+	Dashboard: { screen: DashStack },
 }
 
 const tabNavigationConfiguration = {

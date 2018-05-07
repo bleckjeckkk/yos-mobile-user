@@ -3,7 +3,7 @@ import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighl
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-class Order extends Component {
+class Dashboard extends Component {
 	constructor() {
 		super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -84,6 +84,6 @@ function mapStateToProps(state) {
 		setOrders: state.setOrders,
 	}
 }
-export default connect(mapStateToProps)(Order);
+export default connect(mapStateToProps)(Dashboard);
 
-AppRegistry.registerComponent('Order', () => Order);
+AppRegistry.registerComponent('Dashboard', () => Dashboard);
