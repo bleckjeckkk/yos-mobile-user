@@ -50,7 +50,11 @@ class Login extends Component {
 
   componentWillReceiveProps(){
     console.log("props");
-    this.props.navigation.navigate('Main');
+    if(!this.props.user.is_Staff){
+      this.props.navigation.navigate('Main');
+    }else{
+      alert("Not a staff");
+    }
   }
 
   render () {
@@ -92,7 +96,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
 	return {
-    token: state.Token,
+    user : state.User,
 	}
 }
 

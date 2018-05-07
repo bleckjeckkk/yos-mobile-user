@@ -13,7 +13,7 @@ class Order extends Component {
 	}
 
 	static navigationOptions = {
-		title: 'Order',
+		title: 'Dashboard',
 	};
 
 	componentDidMount() {
