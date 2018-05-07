@@ -12,10 +12,28 @@ export function fetchMenus() {
 		})
 	}
 }
-
+/*
 export function fetchOrders() { 
 	return (dispatch, getState) => {
 		return  Api.get('order-api')
+		.then((response) => {
+			dispatch(setOrders({ orders: response }))
+		})
+		.catch((ex) => {
+			console.log(ex);
+		})
+	}
+}
+*/
+export function fetchOrders(token, user) { 
+	return (dispatch, getState) => {
+		console.log("FETCH ORDERS");
+		obj = {
+			Authorization : "JWT " + token,
+			user: user,
+		}
+		console.log(obj);
+		return Api.post('order-api/', obj)
 		.then((response) => {
 			dispatch(setOrders({ orders: response }))
 		})
@@ -31,8 +49,8 @@ export function getAuthToken(data) {
 		return Api.post('api-token-auth/', data)
 		.then((response) => {
 			console.log("authenticated! token: " + response.token);
-			dispatch(setToken({ token : response.token }));
 			dispatch(setUser({ user : response.user }));
+			dispatch(setToken({ token : response.token }));
 		})
 		.catch((ex) => {
 			alert("Incorrect username/password!");

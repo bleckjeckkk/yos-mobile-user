@@ -27,8 +27,8 @@ class Login extends Component {
     super(props);
     this.state = {
       //TODO: CHANGE THIS BACK
-      username: '',
-      password: '',
+      username: 'RYB',
+      password: 'RYB',
     }
   }
 
@@ -50,7 +50,7 @@ class Login extends Component {
 
   componentWillReceiveProps(){
     console.log("props");
-    this.props.navigation.navigate('Main');    
+    this.props.navigation.navigate('Main');
   }
 
   render () {
@@ -93,7 +93,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
 	return {
-		token: state.Token,
+    token: state.Token,
 	}
 }
 
