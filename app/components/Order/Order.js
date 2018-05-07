@@ -20,8 +20,21 @@ class Order extends Component {
 		this.props.screenProps.fetchOrders(this.props.screenProps.token, this.props.screenProps.user).then(() => {
 			return this.orders()
 		}).then((orders) => {
-			this.setState({orders: this.state.orders.cloneWithRows(orders)})
+			console.log(orders);
+			this.__serializeResponse(orders);
+			//this.setState({orders: this.state.orders.cloneWithRows(orders)})
 		})
+	}
+
+	__serializeResponse(response){
+		//this.$.progress.disabled = true;
+		let result = Object.keys(response).map(function(key){
+			console.log(response[key]["value"]);
+			return {
+				value : response[key]["value"]
+			}
+		})
+		this.setState({orders : this.state.orders.cloneWithRows(result[0].value.data)});
 	}
 
 	orders() {
@@ -37,9 +50,16 @@ class Order extends Component {
 			<TouchableHighlight onPress={() => navigate('Cart', {order:order})}>
 				<View>
 					<ListItem roundAvatar 
-							key={order.name} 
-							title={order.value.user}
-							avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'/>
+							key={order.transaction_id} 
+							title={order.created_on}
+							avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+							subtitle={
+								<View style={{paddingLeft : 5}}>
+									<Text>Payment Method: {order.payment_method}</Text>
+									<Text>Paid: {JSON.stringify(order.paid)}</Text>
+								</View>
+							}
+							/>
 				</View>
 			</TouchableHighlight>
 		)

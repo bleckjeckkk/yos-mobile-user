@@ -32,9 +32,6 @@ export function fetchOrders(token, user) {
 			token : token,
 			user : user,
 		}
-		console.log(token);
-		console.log(user);
-		console.log(obj);
 		return Api.post('order-api/', obj)
 		.then((response) => {
 			dispatch(setOrders({ orders: response }))
@@ -44,6 +41,7 @@ export function fetchOrders(token, user) {
 		})
 	}
 }
+
 
 export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
