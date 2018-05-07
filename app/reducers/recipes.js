@@ -83,3 +83,15 @@ export const Token = createReducer({}, {
 		return ''; 
 	}
 })
+
+export const User = createReducer({},{
+	[types.SET_USER](state, action){
+		console.log("SET_USER");
+		console.log(JSON.stringify(action.user));
+		return action.user;
+	},
+	[types.RESET_USER](state, action){
+		console.log("RESET_USER");
+		return {};
+	}
+})
