@@ -50,10 +50,10 @@ class Login extends Component {
 
   componentWillReceiveProps(){
     console.log("props");
-    if(!this.props.user.is_Staff){
-      this.props.navigation.navigate('Main');
+    if(this.props.user.is_Staff){
+      this.props.navigation.navigate('Main', {level : "STAFF"});
     }else{
-      alert("Not a staff");
+      this.props.navigation.navigate('Main', {level : "USER"});
     }
   }
 
@@ -65,7 +65,7 @@ class Login extends Component {
             <Image source={Images.logo} style={styles.logo} />
           </View>
           <Text style={styles.sectionTitleLogin}> Welcome! </Text>
-          <View style={styles.section} >
+          <View style={styles.section}>
 
             <Text style={styles.sectionLogin}>User</Text>
             <TextInput 

@@ -49,8 +49,8 @@ export function getAuthToken(data) {
 		return Api.post('api-token-auth/', data)
 		.then((response) => {
 			console.log("authenticated!\n" + response.token);
-			dispatch(setUser({ user : response.user }));
 			dispatch(setToken({ token : response.token }));
+			dispatch(setUser({ user : response.user }));
 		})
 		.catch((ex) => {
 			alert("Incorrect username/password!");
