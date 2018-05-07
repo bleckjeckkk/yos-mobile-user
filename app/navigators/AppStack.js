@@ -1,4 +1,4 @@
-import Login from '../containers/Login';
+import Login from '../components/Login/Login';
 import MainApp from '../containers/AppContainer';
 import {StackNavigator} from 'react-navigation';
 
