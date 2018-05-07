@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import ActionButton from 'react-native-action-button';
 
 class Dashboard extends Component {
 	constructor() {
@@ -9,7 +10,6 @@ class Dashboard extends Component {
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
 			orders: ds,
-			isAdmin : 'false',
 		}
 	}
 
@@ -26,9 +26,6 @@ class Dashboard extends Component {
 			console.log(orders);
 			this.__serializeResponse(orders);
 		})
-		if(this.props.screenProps.user.is_Staff){
-			this.setState({ isAdmin : true})
-		}
 	}
 
 	__serializeResponse(response){
@@ -72,9 +69,15 @@ class Dashboard extends Component {
 
 	render() {
 		return (
-			<List containerStyle={{marginBottom: 20}}>
-				<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
-			</List>
+			<View style={{flex:1}}>
+				<List containerStyle={{marginBottom: 20}}>
+					<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
+				</List>
+				<ActionButton
+					buttonColor="rgba(231,76,60,1)"
+					onPress={() => { console.log("hi")}}
+				/>
+			</View>
 		);
 	}
 }
