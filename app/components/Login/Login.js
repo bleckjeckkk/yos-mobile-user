@@ -51,9 +51,9 @@ class Login extends Component {
   componentWillReceiveProps(){
     console.log("props");
     if(this.props.user.is_Staff){
-      this.props.navigation.navigate('Main', {level : "STAFF"});
+      this.props.navigation.navigate('AdminMain');
     }else{
-      this.props.navigation.navigate('Main', {level : "USER"});
+      this.props.navigation.navigate('UserMain');
     }
   }
 
