@@ -68,9 +68,9 @@ export function resetAuthToken() {
 
 }
 
-export function fetchEmployeeCarts(carts) {
+export function fetchEmployeeCarts(token,carts) {
 	return (dispatch, getState) => {
-		return Api.post('order-carts-api/', JSON.stringify({carts: carts}))
+		return Api.post('order-carts-api/', token, JSON.stringify({carts: carts}))
 		.then((response) => {
 			dispatch(setEmployeeCarts({ carts: response }))
 		})
@@ -80,9 +80,9 @@ export function fetchEmployeeCarts(carts) {
 	}
 }
 
-export function fetchOrdersSummary() { 
+export function fetchOrdersSummary(token) { 
 	return (dispatch, getState) => {
-		return  Api.get('order-summary-report-api')
+		return  Api.post('order-summary-report-api/', token)
 		.then((response) => {
 			dispatch(setOrdersSummary({ ordersSummary: response }))
 		})

@@ -59,7 +59,6 @@ class Login extends Component {
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Image source={Images.logo} style={styles.logo} />
-            <Text> {JSON.stringify(this.props.token)} </Text>
           </View>
           <Text style={styles.sectionTitleLogin}> Welcome! </Text>
           <View style={styles.section} >
