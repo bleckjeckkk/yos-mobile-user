@@ -4,6 +4,7 @@ import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import ActionButton from 'react-native-action-button';
 import Logout from '../../Logout/Logout';
+import styles from '../../../Themes/LoginStyles';
 
 class Dashboard extends Component {
 	constructor() {
@@ -71,7 +72,7 @@ class Dashboard extends Component {
 
 	render() {
 		return (
-			<View style={{flex:1}}>
+			<View style={[styles.mainContainer,{flex:1}]}>
 				<ScrollView style={{flex:1}}>
 					<Text style={{fontSize : 32, marginLeft: 5, marginTop: 10}}>Recent Orders</Text>
 					<List containerStyle={{marginBottom: 20}}>

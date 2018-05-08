@@ -64,6 +64,7 @@ class Cart extends Component {
 					<Button 
 						title="Checkout"
 						onPress={() => this.props.navigation.navigate('Checkout')}
+						backgroundColor='#236EFF'
 					/>
 					<SectionList renderItem={this.renderSectionItem}
 								renderSectionHeader={this.renderHeader}

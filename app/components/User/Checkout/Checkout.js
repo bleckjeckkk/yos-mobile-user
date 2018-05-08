@@ -52,6 +52,7 @@ class CartDetail extends Component {
 						raised
 						title="Confirm"
 						onPress={() => this.props.navigation.popToTop() }
+						backgroundColor='#236EFF'
 					/>
 				</ScrollView>
 			</View>
