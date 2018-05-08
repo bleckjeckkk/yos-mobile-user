@@ -5,17 +5,9 @@ import { ActionCreators } from '../actions';
 import { StackNavigator, TabNavigator, TabBarBottom, addNavigationHelpers } from 'react-navigation';
 
 import DashStack from '../navigators/UserStack';
-
-const routeConfiguration = {
-	Dashboard: { screen: DashStack },
-}
-
-const tabNavigationConfiguration = {
-	tabBarPosition: 'bottom',
-	swipeEnabled: false,
-}
-
-const TabNavigation = TabNavigator(routeConfiguration, tabNavigationConfiguration)
+import Cart from '../components/User/Cart/Cart';
+import Checkout from '../components/User/Checkout/Checkout';
+import UserStack from '../navigators/UserStack';
 
 class AppContainer extends Component {
 	constructor(props){
@@ -24,7 +16,7 @@ class AppContainer extends Component {
 	render() {
 		const propsScreen = {...this.props}
 		return (
-			<TabNavigation screenProps={propsScreen}/>
+			<UserStack screenProps={propsScreen}/>
 		)
 	}
 }
