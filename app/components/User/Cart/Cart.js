@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList } from 'react-native';
+import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
@@ -60,14 +60,16 @@ class Cart extends Component {
 	render() {
 		return(
 			<View style={{flex:1}}>
-				<Button 
-					title="Checkout"
-					onPress={() => this.props.navigation.navigate('Checkout')}
-				/>
-				<SectionList renderItem={this.renderSectionItem}
-							renderSectionHeader={this.renderHeader}
-							sections={this.state.carts}
-							keyExtractor={(item) => item.date}/>
+				<ScrollView style={{flex:1}}>
+					<Button 
+						title="Checkout"
+						onPress={() => this.props.navigation.navigate('Checkout')}
+					/>
+					<SectionList renderItem={this.renderSectionItem}
+								renderSectionHeader={this.renderHeader}
+								sections={this.state.carts}
+								keyExtractor={(item) => item.date}/>
+				</ScrollView>
 			</View>
 		)
 	}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight } from 'react-native';
+import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight, ScrollView } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import ActionButton from 'react-native-action-button';
@@ -58,6 +58,7 @@ class Dashboard extends Component {
 							subtitle={
 								<View style={{paddingLeft : 5}}>
 									<Text>Payment Method: {order.payment_method}</Text>
+									<Text>Total: {order.total_cost}</Text>
 									<Text>Paid: {JSON.stringify(order.paid)}</Text>
 								</View>
 							}
@@ -70,9 +71,12 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<View style={{flex:1}}>
-				<List containerStyle={{marginBottom: 20}}>
-					<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
-				</List>
+				<ScrollView style={{flex:1}}>
+					<Text style={{fontSize : 32, marginLeft: 5, marginTop: 10}}>Recent Orders</Text>
+					<List containerStyle={{marginBottom: 20}}>
+						<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
+					</List>
+				</ScrollView>
 				<ActionButton
 					buttonColor="rgba(231,76,60,1)"
 					onPress={() => { this.props.navigation.navigate('Cart') }}
