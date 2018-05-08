@@ -17,7 +17,8 @@ export default class Menu extends Component {
 	};
 
 	componentDidMount() {
-		api.fetchMenus().then((response) => {
+		console.log("CDM: Token: " + this.props.screenProps.token);
+		api.fetchMenus(this.props.screenProps.token).then((response) => {
 			this.setState({menuDataSource: this.state.menuDataSource.cloneWithRows(response)})
 		})
 	}
