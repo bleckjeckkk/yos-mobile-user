@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, ListView, TouchableHighlight } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
-import api from '../../../utilities/api'
+import api from '../../../utilities/api';
+import styles from '../../Themes/LoginStyles';
 
 export default class MenuDetail extends Component {
 	constructor() {
@@ -41,21 +42,14 @@ export default class MenuDetail extends Component {
 		const {params} = this.props.navigation.state;
 		const order = params ? params.order : null;
 		return(
-			<List>
-				<ListView dataSource={this.state.cartDetailDataSource} renderRow={this.renderRow.bind(this)}></ListView>
-				<Text style={styles.total_cost}>Total Cost: {order.total_cost}</Text>
-			</List>
+			<View style={styles.mainContainer}>
+				<List>
+					<ListView dataSource={this.state.cartDetailDataSource} renderRow={this.renderRow.bind(this)}></ListView>
+					<Text style={styles.sectionText}>Total Cost: {order.total_cost}</Text>
+				</List>
+			</View>
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	total_cost: {
-		margin: 10
-	},
-	card_action_button: {
-		margin: 10
-	}
-})
 
 AppRegistry.registerComponent('MenuDetail', () => MenuDetail)

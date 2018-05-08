@@ -3,6 +3,7 @@ import { AppRegistry, View, Text, StyleSheet, ListView  } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import api from '../../../../utilities/api';
+import styles from '../../../Themes/ApplicationStyles';
 
 class OrderDetail extends Component {
 	constructor() {

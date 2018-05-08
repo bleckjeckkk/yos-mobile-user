@@ -54,7 +54,7 @@ const ApplicationStyles = {
     sectionText: {
       ...Fonts.style.normal,
       paddingVertical: Metrics.doubleBaseMargin,
-      color: Colors.snow,
+      color: '#236EFF',
       marginVertical: Metrics.smallMargin,
       textAlign: 'center'
     },
