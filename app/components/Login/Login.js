@@ -90,6 +90,7 @@ class Login extends Component {
 
           </View>
           <Button 
+            disabled = {this.state.loading}
             clear = {true}
             loading = {this.state.loading}
             title="Log-in"
