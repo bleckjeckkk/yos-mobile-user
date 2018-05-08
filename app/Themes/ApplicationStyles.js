@@ -9,7 +9,7 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.background,
       paddingTop : 20,
       paddingBottom: 20,
     },
@@ -24,7 +24,7 @@ const ApplicationStyles = {
     container: {
       flex: 1,
       paddingTop: Metrics.baseMargin,
-      backgroundColor: Colors.transparent
+      backgroundColor: Colors.background
     },
     section: {
       margin: Metrics.section,
@@ -33,14 +33,14 @@ const ApplicationStyles = {
     sectionTitleLogin: {
       ...Fonts.style.h1,
       paddingVertical: Metrics.baseMargin,
-      color: '#e73536',
+      color: '#236EFF',
       marginVertical: Metrics.smallMargin,
       textAlign: 'center',
     },
     sectionLogin: {
       ...Fonts.style.normal,
       paddingVertical: Metrics.baseMargin,
-      color: '#e73536',
+      color: '#236EFF',
       marginVertical: Metrics.smallMargin,
       textAlign: 'center'
     },
@@ -107,7 +107,7 @@ const ApplicationStyles = {
     borderWidth: 1,
     width: "100%",
     color : "black",
-  }
+  },
 }
 
 export default ApplicationStyles

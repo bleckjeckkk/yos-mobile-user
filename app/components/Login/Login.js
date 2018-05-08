@@ -95,6 +95,8 @@ class Login extends Component {
             loading = {this.state.loading}
             title="Log-in"
             onPress={this.onSubmit.bind(this)}
+            style={styles.buttonLogin}
+            backgroundColor='#236EFF'
             />
         </ScrollView>
       </View>
