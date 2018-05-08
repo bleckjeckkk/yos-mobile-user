@@ -18,12 +18,6 @@ class Dashboard extends Component {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		tabBarVisible : false,
-		headerLeft: (
-			<Button
-				onPress={() => alert("Hamburger")}
-				title="Ham"
-			/>
-		),
 		headerRight: (
 			<Logout />
 		),
@@ -85,7 +79,7 @@ class Dashboard extends Component {
 					</List>
 				</ScrollView>
 				<ActionButton
-					buttonColor="rgba(231,76,60,1)"
+					buttonColor="#236EFF"
 					onPress={() => { this.props.navigation.navigate('Cart') }}
 				/>
 			</View>
