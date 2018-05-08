@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, ListView  } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import api from '../../../../utilities/api';
 
-class CartDetail extends Component {
+class OrderDetail extends Component {
 	constructor() {
 		super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -13,7 +14,7 @@ class CartDetail extends Component {
 	}		
 
 	static navigationOptions = {
-		title: 'Cart Detail'
+		title: 'Order Detail'
 	}
 
 	componentDidMount() {
@@ -22,7 +23,9 @@ class CartDetail extends Component {
 		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)}) */
 		const {params} = this.props.navigation.state;
 		console.log(params);
-		
+		console.log(params.order.cart_id);
+		api.fetchCartDetails(params.order,this.props.token)
+		.then((response) => console.log(response));
 	}
 
 	renderRow(cartDetail, sectionId, rowId, hightlightRow) {
@@ -52,9 +55,9 @@ class CartDetail extends Component {
 
 
 function mapStateToProps(state) {
-	return { }
+	return { token : state.Token }
 }
 
-export default connect(mapStateToProps)(CartDetail);
+export default connect(mapStateToProps)(OrderDetail);
 
-AppRegistry.registerComponent('CartDetail', () => CartDetail)
+AppRegistry.registerComponent('OrderDetail', () => OrderDetail)

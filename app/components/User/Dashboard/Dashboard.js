@@ -59,19 +59,19 @@ class Dashboard extends Component {
 	renderRow(order, sectionId, rowId, hightlightRow) {
 		const { navigate } = this.props.navigation;		
 		return (
-					<TouchableHighlight onPress={() => navigate('Cart', {order:order})}>
-						<ListItem roundAvatar 
-								key={order.transaction_id} 
-								title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
-								avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
-								subtitle={
-									<View style={{paddingLeft : 5}}>
-										<Text>Payment Method: {order.payment_method}</Text>
-										<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
-									</View>
-								}
-						/>
-					</TouchableHighlight>
+			<TouchableHighlight onPress={() => navigate('OrderDetail', {order:order})}>
+				<ListItem roundAvatar 
+						key={order.transaction_id} 
+						title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
+						avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+						subtitle={
+							<View style={{paddingLeft : 5}}>
+								<Text>Payment Method: {order.payment_method}</Text>
+								<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
+							</View>
+						}
+				/>
+			</TouchableHighlight>
 		)
 	}
 
