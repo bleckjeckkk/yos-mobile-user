@@ -6,7 +6,10 @@ import Checkout  from '../components/User/Checkout/Checkout';
 export default UserStack = StackNavigator(
 	{
 		Dashboard: { screen: Dashboard },
-		//Cart: { screen: Cart },
-		//Checkout: { screen: Checkout }
-	}
-)
+		Cart: { screen: Cart },
+		Checkout: { screen: Checkout },
+	},{
+		initialRouteName : 'Dashboard',
+		headerMode : 'screen',
+	});
+

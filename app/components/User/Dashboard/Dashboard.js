@@ -75,7 +75,7 @@ class Dashboard extends Component {
 				</List>
 				<ActionButton
 					buttonColor="rgba(231,76,60,1)"
-					onPress={() => { console.log("hi")}}
+					onPress={() => { this.props.navigation.navigate('Cart') }}
 				/>
 			</View>
 		);

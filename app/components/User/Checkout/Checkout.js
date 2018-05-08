@@ -13,13 +13,14 @@ class CartDetail extends Component {
 	}		
 
 	static navigationOptions = {
-		title: 'Cart Detail'
+		title: 'Checkout',
+		tabBarVisible : false,
 	}
 
 	componentDidMount() {
-		const {params} = this.props.navigation.state;
+/* 		const {params} = this.props.navigation.state;
 		const cartDetail = params ? params.cartDetail : null;
-		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)})
+		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)}) */
 	}
 
 	renderRow(cartDetail, sectionId, rowId, hightlightRow) {
@@ -40,9 +41,15 @@ class CartDetail extends Component {
 	
 	render() {
 		return(
-			<List>
-				<ListView dataSource={this.state.cartDetails} renderRow={this.renderRow.bind(this)}></ListView>
-			</List>
+			<View style={{flex:1}}>
+				<List>
+					<ListView dataSource={this.state.cartDetails} renderRow={this.renderRow.bind(this)}></ListView>
+				</List>
+				<Button
+					title="Order"
+					onPress={() => this.props.navigation.popToTop() }
+				/>
+			</View>
 		)
 	}
 }

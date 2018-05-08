@@ -14,17 +14,18 @@ class Cart extends Component {
 	}
 
 	static navigationOptions = {
-		title: 'Carts'
+		title: 'Order',
+		tabBarVisible : false,
 	}
 
 	componentDidMount() {
-		const {params} = this.props.navigation.state;
+/* 		const {params} = this.props.navigation.state;
 		const order = params ? params.order : null;
 		this.props.screenProps.fetchEmployeeCarts(order.value.cart_ids)
 		.then(() => this.carts())
 		.then((response) => {
 			this.setState({carts: response});
-		})
+		}) */
 	}
 
 	carts() {
@@ -58,10 +59,16 @@ class Cart extends Component {
 
 	render() {
 		return(
-			<SectionList renderItem={this.renderSectionItem}
-						 renderSectionHeader={this.renderHeader}
-						 sections={this.state.carts}
-						 keyExtractor={(item) => item.date}/>
+			<View style={{flex:1}}>
+				<Button 
+					title="Checkout"
+					onPress={() => this.props.navigation.navigate('Checkout')}
+				/>
+				<SectionList renderItem={this.renderSectionItem}
+							renderSectionHeader={this.renderHeader}
+							sections={this.state.carts}
+							keyExtractor={(item) => item.date}/>
+			</View>
 		)
 	}
 }
