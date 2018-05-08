@@ -17,6 +17,18 @@ class Dashboard extends Component {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		tabBarVisible : false,
+		headerLeft: (
+			<Button
+				onPress={() => alert("Hamburger")}
+				title="Ham"
+			/>
+		),
+		headerRight: (
+			<Button
+			  onPress={() => this.props.navigation.popToTop() }
+			  title="Log-out"
+			/>
+		),
 	};
 
 	componentDidMount() {
