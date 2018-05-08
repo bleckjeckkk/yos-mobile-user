@@ -3,6 +3,7 @@ import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighl
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import ActionButton from 'react-native-action-button';
+import Logout from '../../Logout/Logout';
 
 class Dashboard extends Component {
 	constructor() {
@@ -24,11 +25,7 @@ class Dashboard extends Component {
 			/>
 		),
 		headerRight: (
-			<Button
-				onPress={() => alert("Log-out") }
-				title="Log-out"
-				color="#f00"
-			/>
+			<Logout />
 		),
 	};
 
