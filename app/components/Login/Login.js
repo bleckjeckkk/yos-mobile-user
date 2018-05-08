@@ -69,7 +69,7 @@ class Login extends Component {
           <View style={styles.centered}>
             <Image source={Images.logo} style={styles.logo} />
           </View>
-          <Text style={styles.sectionTitleLogin}> Welcome! </Text>
+          <Text style={[styles.sectionTitleLogin,{fontWeight: 'bold'}]}> Yahshua {"\n"} Ordering System </Text>
           <View style={styles.section}>
 
             <Text style={styles.sectionLogin}>User</Text>
