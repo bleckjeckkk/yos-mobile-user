@@ -8,9 +8,10 @@ import {
   Keyboard,
   Platform,
   StyleSheet,
-  Button,
   AppRegistry,
-} from 'react-native'
+} from 'react-native';
+
+import { List, ListItem, Button, Card } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
 import { connect } from 'react-redux';
@@ -29,6 +30,7 @@ class Login extends Component {
       //TODO: CHANGE THIS BACK
       username: 'RYB',
       password: 'RYB',
+      loading : false,
     }
   }
 
@@ -45,6 +47,7 @@ class Login extends Component {
   }
   
   onSubmit(){
+    this.setState({loading : true});
     this.props.getAuthToken(this.state);
   }
 
@@ -52,8 +55,10 @@ class Login extends Component {
     console.log("props");
     if(this.props.user.is_Staff){
       this.props.navigation.navigate('AdminMain');
+      this.setState({loading : false});
     }else{
       this.props.navigation.navigate('UserMain');
+      this.setState({loading : false});
     }
   }
 
@@ -85,8 +90,11 @@ class Login extends Component {
 
           </View>
           <Button 
+            clear = {true}
+            loading = {this.state.loading}
             title="Log-in"
-            onPress={this.onSubmit.bind(this)}/>
+            onPress={this.onSubmit.bind(this)}
+            />
         </ScrollView>
       </View>
     )

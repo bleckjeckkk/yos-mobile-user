@@ -25,8 +25,9 @@ class Dashboard extends Component {
 		),
 		headerRight: (
 			<Button
-			  onPress={() => this.props.navigation.popToTop() }
-			  title="Log-out"
+				onPress={() => alert("Log-out") }
+				title="Log-out"
+				color="#f00"
 			/>
 		),
 	};
@@ -61,22 +62,19 @@ class Dashboard extends Component {
 	renderRow(order, sectionId, rowId, hightlightRow) {
 		const { navigate } = this.props.navigation;		
 		return (
-			<TouchableHighlight onPress={() => navigate('Cart', {order:order})}>
-				<View>
-					<ListItem roundAvatar 
-							key={order.transaction_id} 
-							title={order.created_on}
-							avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
-							subtitle={
-								<View style={{paddingLeft : 5}}>
-									<Text>Payment Method: {order.payment_method}</Text>
-									<Text>Total: {order.total_cost}</Text>
-									<Text>Paid: {JSON.stringify(order.paid)}</Text>
-								</View>
-							}
-							/>
-				</View>
-			</TouchableHighlight>
+					<TouchableHighlight onPress={() => navigate('Cart', {order:order})}>
+						<ListItem roundAvatar 
+								key={order.transaction_id} 
+								title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
+								avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+								subtitle={
+									<View style={{paddingLeft : 5}}>
+										<Text>Payment Method: {order.payment_method}</Text>
+										<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
+									</View>
+								}
+						/>
+					</TouchableHighlight>
 		)
 	}
 
