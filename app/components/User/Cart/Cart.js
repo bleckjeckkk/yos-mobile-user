@@ -5,13 +5,15 @@ import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
 import api from '../../../../utilities/api';
 import { Dropdown } from 'react-native-material-dropdown'
+import { fetchMenuDetails } from '../../../actions/recipes';
 
 class Cart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			carts: [],
-			selectedDate : 'date',
+			menuDates: [],
+			selectedDate: 'date',
+			dateID : 'ID',
 		}
 	}
 
@@ -21,15 +23,21 @@ class Cart extends Component {
 	}
 
 	componentDidMount() {
-/* 		const {params} = this.props.navigation.state;
-		const order = params ? params.order : null;
-		this.props.screenProps.fetchEmployeeCarts(order.value.cart_ids)
-		.then(() => this.carts())
+		this.props.screenProps.fetchMenus(this.props.screenProps.token)
 		.then((response) => {
-			this.setState({carts: response});
-		}) */
+			console.log(response);
+			var newDates = [];
+			newDates = Object.keys(response).map((key) =>{
+				return { 
+					value : response[key].date,
+					id : response[key].id,
+				}
+			})
+			console.log("outside loop");
+			console.log(newDates);
+			this.setState({menuDates : newDates});
+		})
 	}
-
 	carts() {
 		return Object.keys(this.props.setEmployeeCarts).map((key) => {
 				return this.props.setEmployeeCarts[key]
@@ -68,20 +76,22 @@ class Cart extends Component {
 						onPress={() => this.props.navigation.navigate('Checkout')}
 						backgroundColor='#236EFF'
 					/>
-					{/* 
-					<SectionList renderItem={this.renderSectionItem}
-								renderSectionHeader={this.renderHeader}
-								sections={this.state.carts}
-								keyExtractor={(item) => item.date}/> */}
 					<Dropdown
 						label="Menu Set Schedule"
-						data={[{value: "date1", key: 0 },{value: "date2", key : 1}]}
-						onChangeText={(value, key) => {
-							this.setState({ selectedDate : value }); 
-							alert(key);
+						data={this.state.menuDates}
+						
+						onChangeText={(value,index) => {
+							this.setState({ 
+								selectedDate : value,
+								dateID : this.state.menuDates[index].id,
+							});	
+							this.props.screenProps.fetchMenuScheduleDetails(this.state.menuDates[index].id)
+							.then((response) => console.log(response))				
 						}}
 					/>
 					<Text>CartID: {this.props.cartID}</Text>
+					<Text>Selected: {this.state.selectedDate}</Text>
+					<Text>MenuDateID: {this.state.dateID}</Text>
 				</ScrollView>
 			</View>
 		)

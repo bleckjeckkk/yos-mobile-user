@@ -27,6 +27,52 @@ export function getCartID(token,user){
 	}
 }
 
+export function fetchMenus(token){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'menu-schedules-api/', {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
+			},
+		})
+		.then((response) => response.json())
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+//     "menu-schedule-details-api/"
+export function fetchMenuScheduleDetails(menuID){
+	return (dispatch,getState) => {
+		console.log(menuID);
+		console.log(baseUrl+'menu-schedule-details-api/'+menuID);
+		return fetch(baseUrl+'menu-schedule-details-api/'+menuID, {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		})
+		.then((response) => response.json())
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+	// return (dispatch,getState) => {
+	// 	console.log(token);
+	// 	console.log(menuID);
+	// 	console.log(baseUrl+'menu-schedule-details-api/'+menuID);
+	// 	return Api.get('menu-schedule-details-api/'+menuID)
+	// 	.then((response) => response.json())
+	// 	.catch((error) => {
+	// 		console.log(error)
+	// 	})
+	// }
+}
+
+/* 
 export function fetchMenus() {
 	return (dispatch, getState) => {
 		return Api.get('menu-api')
@@ -37,7 +83,7 @@ export function fetchMenus() {
 			console.log(ex);
 		})
 	}
-}
+} */
 /*
 export function fetchOrders() { 
 	return (dispatch, getState) => {

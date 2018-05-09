@@ -45,17 +45,17 @@ class Api {
 
 	static xhr(route, params, verb) {
 		const host = baseUrl
-		const url = `${host}${route}`
+		const url = `${host}${route}`;
 		let options = Object.assign({method: verb}, params ? {body: JSON.stringify(params)} : null);
-		//options.headers = Api.headers();
-		console.log(params.token);
-		if (params.token != null) {
+		options.headers = Api.headers();
+		// console.log(params.token);
+/* 		if (params.token != null) {
 			console.log("token not null");
-			options.headers = Api.headers(params.token);
+			//options.headers = {'Authorization' : 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJZQiIsInVzZXJfaWQiOjQ4LCJlbWFpbCI6InJlZ2luYWxkYmF5cm9uQGdtYWlsLmNvbSIsImV4cCI6MTUyNTg1MzcyM30.JPhHWcdd3xHC2SXgbxTETI-iKfcBJej6EvHG99cIx7o'};
 		}else{
 			console.log("token null");
 			options.headers = Api.headers(null);
-		}
+		} */
 		return fetch(url, options).then((resp) => {
 			let json = resp.json();
 			if(resp.ok) { return json;}
