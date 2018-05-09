@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import Dashboard from '../components/User/Dashboard/Dashboard';
-import Cart  from '../components/Cart/Cart';
+import Cart  from '../components/User/Cart/Cart';
 import OrderDetail from '../components/OrderDetail/OrderDetail';
 import Checkout  from '../components/User/Checkout/Checkout';
 
