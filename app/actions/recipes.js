@@ -44,15 +44,18 @@ export function fetchMenus(token){
 	}
 }
 //     "menu-schedule-details-api/"
-export function fetchMenuScheduleDetails(menuID){
+export function fetchMenuScheduleDetails(token,menuID){
 	return (dispatch,getState) => {
 		console.log(menuID);
+		// `${baseUrl}menu-schedule-details-api/${menuID}/`
+
 		console.log(baseUrl+'menu-schedule-details-api/'+menuID);
-		return fetch(baseUrl+'menu-schedule-details-api/'+menuID, {
+		return fetch(baseUrl+'menu-schedule-details-api/'+menuID+"/", {
 			method: 'GET',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
 			},
 		})
 		.then((response) => response.json())

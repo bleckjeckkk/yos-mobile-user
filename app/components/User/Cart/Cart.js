@@ -85,7 +85,7 @@ class Cart extends Component {
 								selectedDate : value,
 								dateID : this.state.menuDates[index].id,
 							});	
-							this.props.screenProps.fetchMenuScheduleDetails(this.state.menuDates[index].id)
+							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
 							.then((response) => console.log(response))				
 						}}
 					/>
