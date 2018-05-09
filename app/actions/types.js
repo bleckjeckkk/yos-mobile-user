@@ -23,3 +23,5 @@ export const RESET_USER = 'RESET_USER'
 export const SET_ACCEPTED = 'SET_ACCEPTED'
 
 export const SET_FAIL = 'SET-FAIL'
+
+export const SET_CART_ID = 'SET_CART_ID'

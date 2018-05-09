@@ -101,3 +101,9 @@ export const AuthCheck = createReducer(false,{
 		return action.value;
 	},
 })
+
+export const CartID = createReducer("",{
+	[types.SET_CART_ID](state, action){
+		return action.id;
+	},
+})

@@ -54,19 +54,17 @@ class Dashboard extends Component {
 	renderRow(order, sectionId, rowId, hightlightRow) {
 		const { navigate } = this.props.navigation;		
 		return (
-			<TouchableHighlight onPress={() => navigate('OrderDetail', {order:order})}>
-				<ListItem roundAvatar 
-						key={order.transaction_id} 
-						title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
-						avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
-						subtitle={
-							<View style={{paddingLeft : 5}}>
-								<Text>Payment Method: {order.payment_method}</Text>
-								<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
-							</View>
-						}
-				/>
-			</TouchableHighlight>
+			<ListItem roundAvatar 
+					key={order.transaction_id} 
+					title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
+					avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+					subtitle={
+						<View style={{paddingLeft : 5}}>
+							<Text>Payment Method: {order.payment_method}</Text>
+							<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
+						</View>
+					}
+			/>
 		)
 	}
 
@@ -81,7 +79,12 @@ class Dashboard extends Component {
 				</ScrollView>
 				<ActionButton
 					buttonColor="#236EFF"
-					onPress={() => { this.props.navigation.navigate('Cart') }}
+					onPress={() => { 
+						console.log(this.props.screenProps.token);
+						console.log(this.props.screenProps.user);
+						this.props.screenProps.getCartID(this.props.screenProps.token,this.props.screenProps.user);
+						this.props.navigation.navigate('Cart'); 
+					}}
 				/>
 			</View>
 		);

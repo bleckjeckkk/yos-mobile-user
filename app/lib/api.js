@@ -10,7 +10,7 @@ class Api {
 		if (token){
 			return {
 				'Accept': 'application/json',
-				'Authorization' : 'jwt ' + token,
+				'Authorization' : 'JWT ' + token,
 				'Content-type': 'application/json',
 				'dataType': 'json',
 				'X-Requested-With': 'XMLHttpRequest',

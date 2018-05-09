@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView } from 'react-native';
+import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
 import api from '../../../../utilities/api';
+import { Dropdown } from 'react-native-material-dropdown'
 
 class Cart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			carts: []
+			carts: [],
+			selectedDate : 'date',
 		}
 	}
 
@@ -66,10 +68,20 @@ class Cart extends Component {
 						onPress={() => this.props.navigation.navigate('Checkout')}
 						backgroundColor='#236EFF'
 					/>
+					{/* 
 					<SectionList renderItem={this.renderSectionItem}
 								renderSectionHeader={this.renderHeader}
 								sections={this.state.carts}
-								keyExtractor={(item) => item.date}/>
+								keyExtractor={(item) => item.date}/> */}
+					<Dropdown
+						label="Menu Set Schedule"
+						data={[{value: "date1", key: 0 },{value: "date2", key : 1}]}
+						onChangeText={(value, key) => {
+							this.setState({ selectedDate : value }); 
+							alert(key);
+						}}
+					/>
+					<Text>CartID: {this.props.cartID}</Text>
 				</ScrollView>
 			</View>
 		)
@@ -79,7 +91,8 @@ class Cart extends Component {
 function mapStateToProps(state) {
 	return {
 		setEmployeeCarts: state.setEmployeeCarts,
-		token : state.Token
+		token : state.Token,
+		cartID : state.CartID,
 	}
 }
 

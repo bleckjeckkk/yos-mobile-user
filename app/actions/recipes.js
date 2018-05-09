@@ -1,6 +1,32 @@
 import * as types from './types';
 import Api from '../lib/api';
 
+const baseUrl = 'http://35.227.88.229:9000/api/v1/';
+
+export function getCartID(token,user){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'create-cart-api/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
+			},
+			body: JSON.stringify({
+				userDetails: user
+			})
+		})
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response.data);
+			dispatch(setCartID({ id: response.data }));
+		})
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
 export function fetchMenus() {
 	return (dispatch, getState) => {
 		return Api.get('menu-api')
@@ -157,6 +183,20 @@ export function resetUser() {
 		type: types.RESET_USER
 	}
 }
+
+export function setCartID( { id } ){
+	return{
+		type: types.SET_CART_ID,
+		id
+	}
+}
+
+
+
+
+
+
+
 
 export function setSearchedRecipes( { recipes } ) {
 	return {
