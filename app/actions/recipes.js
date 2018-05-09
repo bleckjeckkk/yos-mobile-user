@@ -72,7 +72,7 @@ export function resetAuthToken() {
 
 export function fetchEmployeeCarts(token,carts) {
 	return (dispatch, getState) => {
-		return Api.post('order-carts-api/', token, JSON.stringify({carts: carts}))
+		return Api.post('order-carts-api/', {token:token}, JSON.stringify({carts: carts}))
 		.then((response) => {
 			dispatch(setEmployeeCarts({ carts: response }))
 		})
@@ -98,7 +98,6 @@ export function fetchCartDetailWithIds(cart_detail_ids) {
 	return (dispatch, getState) => {
 		return Api.post('cart-details-api/', JSON.stringify({cartDetailIds: cart_detail_ids}))
 		.then((response) => {
-			console.log(response)
 			dispatch(setOrderSummaryDetail({ orderSummaryDetail: response }))
 		})
 		.catch((ex) => {
