@@ -20,7 +20,7 @@ export default class MenuDetail extends Component {
 	componentDidMount() {
 		const {params} = this.props.navigation.state;
 		const order = params ? params.order : null;
-		api.fetchOrderCarts(order.cart_id).then((response) => {
+		api.fetchOrderCarts(this.props.screenProps.token,order.cart_id).then((response) => {
 			this.setState({cartDetailDataSource: this.state.cartDetailDataSource.cloneWithRows(response)})
 		})
 	}

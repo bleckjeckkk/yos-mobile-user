@@ -20,7 +20,7 @@ class Cart extends Component {
 	componentDidMount() {
 		const {params} = this.props.navigation.state;
 		const order = params ? params.order : null;
-		this.props.screenProps.fetchEmployeeCarts(order.value.cart_ids)
+		this.props.screenProps.fetchEmployeeCarts(this.props.screenProps.token,order.cart_ids)
 		.then(() => this.carts())
 		.then((response) => {
 			this.setState({carts: response});
