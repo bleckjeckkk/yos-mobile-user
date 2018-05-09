@@ -89,3 +89,15 @@ export const User = createReducer({},{
 		return {};
 	}
 })
+
+export const AuthAccept = createReducer(false,{
+	[types.SET_ACCEPTED](state, action){
+		return action.value;
+	},
+})
+
+export const AuthCheck = createReducer(false,{
+	[types.SET_FAIL](state, action){
+		return action.value;
+	},
+})

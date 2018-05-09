@@ -46,14 +46,19 @@ export function fetchOrders(token, user) {
 export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");
 	return (dispatch, getState) => {
+		dispatch(setFail({value : false}));
 		return Api.post('api-token-auth/', data)
 		.then((response) => {
 			console.log("authenticated!\n" + response.token);
-			dispatch(setToken({ token : response.token }));
 			dispatch(setUser({ user : response.user }));
+			dispatch(setToken({ token : response.token }));
+			dispatch(setAccepted({ value : true }));
+			dispatch(setFail({ value : false }));
 		})
 		.catch((ex) => {
-			alert("Incorrect username/password!");
+			alert("Incorrect login credentials!");
+			dispatch(setAccepted({ value : false }));
+			dispatch(setFail({ value : true }));
 			console.log("!!!" + JSON.stringify(ex));
 		})
 	}
@@ -63,7 +68,6 @@ export function resetAuthToken() {
 	return (dispatch, getState) => {
 		return dispatch(resetToken());
 	}
-
 }
 
 export function fetchEmployeeCarts(token,carts) {
@@ -115,6 +119,7 @@ export function completeOrderDetail(orderDetailId) {
 	}
 }
 
+
 export function setToken( { token } ) {
 	return {
 		type: types.SET_TOKEN,
@@ -128,6 +133,19 @@ export function resetToken() {
 	}
 }
 
+export function setAccepted( { value } ) {
+	return {
+		type: types.SET_ACCEPTED,
+		value
+	}
+}
+
+export function setFail({value}) {
+	return {
+		type: types.SET_FAIL,
+		value
+	}
+}
 
 export function setUser( { user } ) {
 	return {
@@ -135,7 +153,6 @@ export function setUser( { user } ) {
 		user
 	}
 }
-
 export function resetUser() {
 	return {
 		type: types.RESET_USER

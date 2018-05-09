@@ -9,6 +9,7 @@ import {
   Platform,
   StyleSheet,
   AppRegistry,
+  SafeAreaView,
 } from 'react-native';
 
 import { List, ListItem, Button, Card } from 'react-native-elements';
@@ -51,20 +52,25 @@ class Login extends Component {
     this.props.getAuthToken(this.state);
   }
 
-  componentWillReceiveProps(){
+  componentWillReceiveProps(nextProps){
     console.log("props");
-    if(this.props.user.is_Staff){
-      this.props.navigation.navigate('AdminMain');
-      this.setState({loading : false});
+    console.log(nextProps);
+    if(nextProps.accept && !nextProps.fail){
+      if(this.props.user.is_Staff){
+        this.props.navigation.navigate('AdminMain');
+        this.setState({loading : false});
+      }else{
+        this.props.navigation.navigate('UserMain');
+        this.setState({loading : false});
+      }
     }else{
-      this.props.navigation.navigate('UserMain');
       this.setState({loading : false});
     }
   }
 
   render () {
     return (
-      <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Image source={Images.logo} style={styles.logo} />
@@ -98,7 +104,7 @@ class Login extends Component {
             backgroundColor='#236EFF'
             />
         </ScrollView>
-      </View>
+      </SafeAreaView>
     )
   }
 }
@@ -107,6 +113,8 @@ class Login extends Component {
 function mapStateToProps(state) {
 	return {
     user : state.User,
+    accept : state.AuthAccept,
+    fail : state.AuthCheck,
 	}
 }
 
