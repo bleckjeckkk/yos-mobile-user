@@ -10,9 +10,11 @@ import { fetchMenuDetails } from '../../../actions/recipes';
 class Cart extends Component {
 	constructor(props) {
 		super(props);
+		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
 			menuDates: [],
 			selectedDate: 'date',
+			cartInput: ds ,
 			dateID : 'ID',
 		}
 	}
@@ -38,27 +40,25 @@ class Cart extends Component {
 			this.setState({menuDates : newDates});
 		})
 	}
-	carts() {
-		return Object.keys(this.props.setEmployeeCarts).map((key) => {
-				return this.props.setEmployeeCarts[key]
-			}
-		);
-	}
 
-	renderSectionItem(item) {
-		// Todo: Add onPress functions
-		const swipeoutBtns = [
-			{ text: 'Cancel', backgroundColor: 'red'},
-			{ text: 'Complete', backgroundColor: 'green'}
-		]
-		
-		return( 
-			<Swipeout left={swipeoutBtns}>
-				<View style={{backgroundColor: 'white', padding: 20}}>
-					<Text>{item.item.menus[0].name} </Text>
-					<Text>{item.item.menus[0].description}</Text>
+	renderRow(cart, sectionId, rowId, hightlightRow) {
+		const { navigate } = this.props.navigation;		
+		return (
+			<TouchableHighlight>
+				<View>
+					<ListItem roundAvatar 
+							key={cart.id} 
+							title={cart.menu.description}
+							avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+							subtitle={
+								<View style={{paddingLeft : 5}}>
+									<Text>Cost: {cart.menu.credit_cost}</Text>
+									<Text>Serving Schedule: {cart.menu.serving_schedule_name}</Text>
+								</View>
+							}
+							/>
 				</View>
-			</Swipeout>
+			</TouchableHighlight>
 		)
 	}
 
@@ -68,6 +68,7 @@ class Cart extends Component {
 	}
 
 	render() {
+		var ordersv = [];
 		return(
 			<View style={{flex:1}}>
 				<ScrollView style={{flex:1}}>
@@ -86,12 +87,21 @@ class Cart extends Component {
 								dateID : this.state.menuDates[index].id,
 							});	
 							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
-							.then((response) => console.log(response))				
+							.then((response) => {
+								Object.keys(response).map(function(key){
+									ordersv[key] = response[key]
+								})	
+								this.setState({cartInput : this.state.cartInput.cloneWithRows(ordersv)});
+								console.log(this.state.cartInput)
+							})				
 						}}
 					/>
 					<Text>CartID: {this.props.cartID}</Text>
 					<Text>Selected: {this.state.selectedDate}</Text>
 					<Text>MenuDateID: {this.state.dateID}</Text>
+					<List containerStyle={{marginBottom: 20}}>
+					<ListView dataSource={this.state.cartInput} renderRow={this.renderRow.bind(this)}/>
+					</List>
 				</ScrollView>
 			</View>
 		)
