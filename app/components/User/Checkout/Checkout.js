@@ -18,15 +18,15 @@ class CartDetail extends Component {
 	}
 
 	componentDidMount() {
-/* 		const {params} = this.props.navigation.state;
+ 		const {params} = this.props.navigation.state;
 		const cartDetail = params ? params.cartDetail : null;
-		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)}) */
+		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)})
 	}
 
 	renderRow(cartDetail, sectionId, rowId, hightlightRow) {
 		return (
 			<List>
-				<ListView dataSource={cartDetail} renderRow={this.renderMenuRow.bind(this)}></ListView>
+				<ListView dataSource={this.state.cartDetails} renderRow={this.renderMenuRow.bind(this)}></ListView>
 			</List>
 		)
 	}
@@ -34,7 +34,7 @@ class CartDetail extends Component {
 	renderMenuRow(menu, sectionId, rowId, hightlightRow) {
 		return (
 			<View>
-				<ListItem key={menu.id}  title={menu.name} />
+				<ListItem key={menu.menu.id}  title={menu.menu.name} />
 			</View>
 		)
 	}
