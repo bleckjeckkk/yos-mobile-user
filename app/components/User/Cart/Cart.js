@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker } from 'react-native';
+import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
@@ -35,16 +35,13 @@ class Cart extends Component {
 					id : response[key].id,
 				}
 			})
-			console.log("outside loop");
-			console.log(newDates);
 			this.setState({menuDates : newDates});
 		})
 	}
 
 	renderRow(cart, sectionId, rowId, hightlightRow) {
-		const { navigate } = this.props.navigation;		
 		return (
-			<TouchableHighlight>
+			<TouchableHighlight onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}>
 				<View>
 					<ListItem roundAvatar 
 							key={cart.id} 
@@ -57,6 +54,7 @@ class Cart extends Component {
 								</View>
 							}
 							/>
+					<TextInput />
 				</View>
 			</TouchableHighlight>
 		)
@@ -77,6 +75,7 @@ class Cart extends Component {
 						onPress={() => this.props.navigation.navigate('Checkout')}
 						backgroundColor='#236EFF'
 					/>
+					
 					<Dropdown
 						label="Menu Set Schedule"
 						data={this.state.menuDates}
@@ -88,11 +87,21 @@ class Cart extends Component {
 							});	
 							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
 							.then((response) => {
+								var cart_id = this.props.cartID;
 								Object.keys(response).map(function(key){
-									ordersv[key] = response[key]
+									ordersv[key] = {
+										cut_off_time: response[key].cut_off_time,
+										id: response[key].id,
+										is_active: response[key].is_active,
+										is_deleted: response[key].is_deleted,
+										menu: response[key].menu,
+										menu_set_schedule_id: response[key].menu_set_schedule_id,
+										serving_schedule_id: response[key].serving_schedule_id,
+										cart: cart_id,
+										quantity: 0
+									}
 								})	
 								this.setState({cartInput : this.state.cartInput.cloneWithRows(ordersv)});
-								console.log(this.state.cartInput)
 							})				
 						}}
 					/>

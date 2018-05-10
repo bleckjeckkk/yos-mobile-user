@@ -63,16 +63,24 @@ export function fetchMenuScheduleDetails(token,menuID){
 			console.log(error)
 		})
 	}
-	// return (dispatch,getState) => {
-	// 	console.log(token);
-	// 	console.log(menuID);
-	// 	console.log(baseUrl+'menu-schedule-details-api/'+menuID);
-	// 	return Api.get('menu-schedule-details-api/'+menuID)
-	// 	.then((response) => response.json())
-	// 	.catch((error) => {
-	// 		console.log(error)
-	// 	})
-	// }
+}
+export function addMenuItem(token,cart){
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'add-menu-to-cart-api/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
+			},
+			body: JSON.stringify(cart)
+		})
+		.then((response) => response.json()).then((response) => alert(response))
+		.catch((error) => {
+			alert(error)
+			console.log(error)
+		})
+	}
 }
 
 /* 
