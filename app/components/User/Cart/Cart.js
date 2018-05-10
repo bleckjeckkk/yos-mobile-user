@@ -29,7 +29,6 @@ class Cart extends Component {
 	componentDidMount() {
 		this.props.screenProps.fetchMenus(this.props.screenProps.token)
 		.then((response) => {
-			console.log(response);
 			var newDates = [];
 			newDates = Object.keys(response).map((key) =>{
 				return { 
@@ -91,11 +90,8 @@ class Cart extends Component {
 	quantityChanger(itemID,value){
 		this.setState({cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}) })
 		newData = this.state.data.slice();
-		console.log(newData);
 		for(data in newData){
-			console.log(newData[data].id + " = " + itemID);
 			if(newData[data].id === itemID){
-				console.log("found!");
 				newData[data].quantity = value;
 				break;
 			}
@@ -104,9 +100,6 @@ class Cart extends Component {
 			cartInput : this.state.cartInput.cloneWithRows(newData),
 			data : newData,
 		});
-
-		alert(itemID);
-		alert(value);
 	}
 
 	renderHeader(headerItem) {
@@ -156,7 +149,6 @@ class Cart extends Component {
 									cartInput : this.state.cartInput.cloneWithRows(ordersv),
 									data : ordersv
 								});
-								console.log(ordersv);
 							})				
 						}}
 					/>
