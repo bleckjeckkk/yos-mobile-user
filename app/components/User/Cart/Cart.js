@@ -141,7 +141,7 @@ class Cart extends Component {
 										menu: response[key].menu,
 										menu_set_schedule_id: response[key].menu_set_schedule_id,
 										serving_schedule_id: response[key].serving_schedule_id,
-										quantity: "0",
+										quantity: "1",
 									}
 								})	
 								ordersv.sort((a,b) => a.serving_schedule_id - b.serving_schedule_id)

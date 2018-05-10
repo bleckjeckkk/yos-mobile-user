@@ -9,6 +9,7 @@ class CartDetail extends Component {
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
 			cartDetails: ds,
+			totalAmount: 0,
 		}
 	}		
 
@@ -33,7 +34,15 @@ class CartDetail extends Component {
 	renderRow(menu, sectionId, rowId, hightlightRow) {
 		return (
 			<View>
-				<ListItem key={menu.id}  title={menu.menu.name} />
+				<ListItem 
+					key={menu.id}
+					title={menu.menu.name}
+					subtitle={
+						<View>
+							<Text>Php {menu.menu.credit_cost}</Text>
+							<Text>Quantity: {menu.quantity}</Text>
+						</View>
+					}/>
 			</View>
 		)
 	}
