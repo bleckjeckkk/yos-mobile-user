@@ -65,6 +65,7 @@ export function fetchMenuScheduleDetails(token,menuID){
 	}
 }
 export function addMenuItem(token,cart){
+	console.log(JSON.stringify(cart))
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'add-menu-to-cart-api/', {
 			method: 'POST',
@@ -75,7 +76,7 @@ export function addMenuItem(token,cart){
 			},
 			body: JSON.stringify(cart)
 		})
-		.then((response) => response.json()).then((response) => alert(response))
+		.then((response) => console.log(response))
 		.catch((error) => {
 			alert(error)
 			console.log(error)
@@ -83,6 +84,15 @@ export function addMenuItem(token,cart){
 	}
 }
 
+				/* cart: cart.cart,
+				cut_off_time: cart.cut_off_time,
+				id: cart.id,
+				is_active: cart.is_active,
+				is_deleted: cart.is_deleted,
+				menu: cart.menu,
+				menu_set_schedule_id: cart.menu_set_schedule_id,
+				quantity: 0,
+				serving_schedule_id: cart.serving_schedule_id, */
 /* 
 export function fetchMenus() {
 	return (dispatch, getState) => {

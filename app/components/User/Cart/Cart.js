@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker, TextInput } from 'react-native';
+import { StyleSheet, View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
 import api from '../../../../utilities/api';
 import { Dropdown } from 'react-native-material-dropdown'
 import { fetchMenuDetails } from '../../../actions/recipes';
+import ActionButton from 'react-native-action-button';
 
 class Cart extends Component {
 	constructor(props) {
@@ -41,22 +42,19 @@ class Cart extends Component {
 
 	renderRow(cart, sectionId, rowId, hightlightRow) {
 		return (
-			<TouchableHighlight onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}>
 				<View>
-					<ListItem roundAvatar 
-							key={cart.id} 
-							title={cart.menu.description}
-							avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
-							subtitle={
-								<View style={{paddingLeft : 5}}>
-									<Text>Cost: {cart.menu.credit_cost}</Text>
-									<Text>Serving Schedule: {cart.menu.serving_schedule_name}</Text>
-								</View>
-							}
-							/>
-					<TextInput />
-				</View>
-			</TouchableHighlight>
+				<ListItem
+						key={cart.id} 
+						title={<Text style={styles.titleCart}>{cart.menu.description}</Text>}
+						subtitle={
+							<View >
+								<Text>Cost: {cart.menu.credit_cost}</Text>
+								<Text>Serving Schedule: {cart.menu.serving_schedule_name}</Text>
+							</View>
+						}/>
+				<TextInput />
+				<ActionButton size={35} onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}/>
+			</View>
 		)
 	}
 
@@ -72,7 +70,7 @@ class Cart extends Component {
 				<ScrollView style={{flex:1}}>
 					<Button 
 						title="Checkout"
-						onPress={() => this.props.navigation.navigate('Checkout')}
+						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.cartInput})}
 						backgroundColor='#236EFF'
 					/>
 					
@@ -90,15 +88,15 @@ class Cart extends Component {
 								var cart_id = this.props.cartID;
 								Object.keys(response).map(function(key){
 									ordersv[key] = {
+										cart: JSON.stringify(cart_id),
 										cut_off_time: response[key].cut_off_time,
 										id: response[key].id,
 										is_active: response[key].is_active,
 										is_deleted: response[key].is_deleted,
 										menu: response[key].menu,
 										menu_set_schedule_id: response[key].menu_set_schedule_id,
+										quantity: "0",
 										serving_schedule_id: response[key].serving_schedule_id,
-										cart: cart_id,
-										quantity: 0
 									}
 								})	
 								this.setState({cartInput : this.state.cartInput.cloneWithRows(ordersv)});
@@ -116,6 +114,13 @@ class Cart extends Component {
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+	titleCart: {
+		fontWeight: 'bold',
+		fontSize: 20,
+	}
+})
 
 function mapStateToProps(state) {
 	return {
