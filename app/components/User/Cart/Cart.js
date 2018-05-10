@@ -172,13 +172,6 @@ class Cart extends Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	titleCart: {
-		fontWeight: 'bold',
-		fontSize: 20,
-	}
-})
-
 function mapStateToProps(state) {
 	return {
 		setEmployeeCarts: state.setEmployeeCarts,
