@@ -114,7 +114,7 @@ class Cart extends Component {
 				<ScrollView style={{flex:1}}>
 					<Button 
 						title="Checkout"
-						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.cartInput})}
+						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})}
 						backgroundColor='#236EFF'
 					/>
 					
@@ -139,8 +139,8 @@ class Cart extends Component {
 										is_active: response[key].is_active,
 										is_deleted: response[key].is_deleted,
 										menu: response[key].menu,
+										menu_set_schedule_id: response[key].menu_set_schedule_id,
 										serving_schedule_id: response[key].serving_schedule_id,
-										cart: cart_id,
 										quantity: "0",
 									}
 								})	

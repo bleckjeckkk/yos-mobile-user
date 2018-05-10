@@ -20,21 +20,20 @@ class CartDetail extends Component {
 	componentDidMount() {
  		const {params} = this.props.navigation.state;
 		const cartDetail = params ? params.cartDetail : null;
-		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)})
+		console.log(cartDetail)
+		//this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)})
+		this.props.screenProps.fetchCartDetails(this.props.screenProps.token,cartDetail[0])
+		.then((response) => {
+			this.setState({
+				cartDetails: this.state.cartDetails.cloneWithRows(response)
+			})
+		})
 	}
 
-	renderRow(cartDetail, sectionId, rowId, hightlightRow) {
-		return (
-			<List>
-				<ListView dataSource={this.state.cartDetails} renderRow={this.renderMenuRow.bind(this)}></ListView>
-			</List>
-		)
-	}
-	
-	renderMenuRow(menu, sectionId, rowId, hightlightRow) {
+	renderRow(menu, sectionId, rowId, hightlightRow) {
 		return (
 			<View>
-				<ListItem key={menu.menu.id}  title={menu.menu.name} />
+				<ListItem key={menu.id}  title={menu.menu.name} />
 			</View>
 		)
 	}

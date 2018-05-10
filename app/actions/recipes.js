@@ -64,6 +64,24 @@ export function fetchMenuScheduleDetails(token,menuID){
 		})
 	}
 }
+export function fetchCartDetails(token,order) {
+	alert('hey')
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'cart-detail-api/'+order.cart+'/', {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
+			}
+		})
+		.then((response) => response.json())
+		.catch((error) => {
+			console.log(error)
+		})
+	}
+}
+
 export function addMenuItem(token,cart){
 	console.log(JSON.stringify(cart))
 	return (dispatch,getState) => {

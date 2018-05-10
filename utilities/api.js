@@ -21,7 +21,8 @@ const api = {
 	* Requires order object
 	*/
 	fetchCartDetails(order) {
-		return fetch(baseUrl+'cart-detail-api/'+order.cart)
+		alert('hey')
+		return fetch(baseUrl+'cart-detail-api/'+order.cart+'/')
 		.then((response) => response.json())
 		.catch((error) => {
 			console.log(error)
