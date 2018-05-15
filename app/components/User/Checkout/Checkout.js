@@ -22,7 +22,6 @@ class CartDetail extends Component {
  		const {params} = this.props.navigation.state;
 		const cartDetail = params ? params.cartDetail : null;
 		console.log(cartDetail)
-		//this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)})
 		this.props.screenProps.fetchCartDetails(this.props.screenProps.token,cartDetail[0])
 		.then((response) => {
 			this.setState({
@@ -43,30 +42,36 @@ class CartDetail extends Component {
 		return (
 			<View>
 				<ListItem 
+					hideChevron={true}
 					key={menu.id}
-					title={menu.menu.name}
+					title={
+						<Text>
+							<Text style={{ padding: 5, fontSize : 18 , fontWeight : 'bold'}}>
+								{menu.menu.name}
+							</Text>
+							{" x " + menu.quantity}
+						</Text>
+					}
 					subtitle={
-						<View>
-							<Text>Php {menu.menu.credit_cost}</Text>
-							<Text>Quantity: {menu.quantity}</Text>
+						<View style={{ paddingLeft : 5 }}>
+							<Text>Php <Text style={{ fontWeight: 'bold' }}>{Number(menu.menu.credit_cost).toFixed(2)}</Text></Text>
 						</View>
 					}/>
 			</View>
 		)
 	}
 
-	onPress()	{
+	onPress(){
 		const {params} = this.props.navigation.state;
 		const cartDetail = params ? params.cartDetail : null;
 		var cart = {
-			cart: cartDetail[0].cart,
+			cart: this.props.cartID,
 			payment_method: "Salary Deduction",
-			total_cost: 0,
+			total_cost: this.state.totalAmount,
 			user: this.props.user.id,
-		}
-		alert(cartDetail[0].cart)
-		this.props.screenProps.makeOrder(this.props.token,cart)
-		this.props.navigation.popToTop()
+		};
+		this.props.screenProps.makeOrder(this.props.token,cart);
+		this.props.navigation.navigate('Dashboard');
 	}
 	
 	render() {
@@ -77,7 +82,9 @@ class CartDetail extends Component {
 					<List>
 						<ListView dataSource={this.state.cartDetails} renderRow={this.renderRow.bind(this)}></ListView>
 					</List>
-					<Text style={{fontSize : 24, marginLeft: 5, marginTop: 10}}>Total: Php {this.state.totalAmount}</Text>
+					<Text style={{fontSize : 24, marginLeft: 5, marginVertical: 10}}>Total: Php
+						<Text style={{fontWeight : 'bold'}}> {Number(this.state.totalAmount).toFixed(2)}</Text>
+					</Text>
 					<Button
 						raised
 						title="Confirm"

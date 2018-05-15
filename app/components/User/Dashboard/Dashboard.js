@@ -15,22 +15,35 @@ class Dashboard extends Component {
 		}
 	}
 
+
 	static navigationOptions = {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		tabBarVisible : false,
+		headerLeft: (
+			<Button 
+				title="Refresh"
+				onPress={() => this.loadOrders()}
+			/>
+		),
 		headerRight: (
 			<Logout />
 		),
 	};
 
-	componentDidMount() {
+	loadOrders(){
 		this.props.screenProps.fetchOrders(this.props.screenProps.token, this.props.screenProps.user).then(() => {
 			return this.orders()
 		}).then((orders) => {
 			console.log(orders);
 			this.__serializeResponse(orders);
 		})
+		alert("loadOrders");
+	}
+
+	componentDidMount() {
+		this.loadOrders();
+		alert("componentDidMount");
 	}
 
 	__serializeResponse(response){

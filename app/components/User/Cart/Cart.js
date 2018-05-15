@@ -66,7 +66,7 @@ class Cart extends Component {
 										<Icon
 											raised
 											onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}
-											name='cart-plus'
+											name='add'
 											type='MaterialCommunityIcons'
 										/>
 										<Dropdown
@@ -150,7 +150,7 @@ class Cart extends Component {
 								ordersv.sort((a,b) => a.serving_schedule_id - b.serving_schedule_id)
 								this.setState({
 									cartInput : this.state.cartInput.cloneWithRows(ordersv),
-									data : ordersv
+									data : ordersv,
 								});
 							})				
 						}}

@@ -93,7 +93,13 @@ export function addMenuItem(token,cart){
 			},
 			body: JSON.stringify(cart)
 		})
-		.then((response) => console.log(response))
+		.then((response) => {
+			if(response.ok){
+				alert("Added to cart!");
+			}else{
+				alert("An error occurred.");
+			}
+		})
 		.catch((error) => {
 			alert(error)
 			console.log(error)
