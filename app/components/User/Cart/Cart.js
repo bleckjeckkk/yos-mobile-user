@@ -73,7 +73,7 @@ class Cart extends Component {
 													this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)
 													this.setState({ okToCheckout : true });
 												}else{
-													alert("You can't add one");
+													alert("You can't add none");
 												}
 											}}
 											name='add'
