@@ -178,6 +178,23 @@ export function fetchOrders(token, user) {
 	}
 }
 
+export function resetOrders() { 
+	return (dispatch, getState) => {
+		console.log("RESET ORDERS");
+		obj = {
+			token : token,
+			user : user,
+		}
+		return Api.post('order-api/', obj)
+		.then((response) => {
+			dispatch(setOrders({ orders: response }))
+		})
+		.catch((ex) => {
+			console.log(ex);
+		})
+	}
+}
+
 
 export function getAuthToken(data) {
 	console.log("LOGIN WAS PRESSED");

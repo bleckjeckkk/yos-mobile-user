@@ -31,6 +31,10 @@ class Dashboard extends Component {
 		),
 	};
 
+	resetOrders(){
+		this.props.screenProps.resetOrders().then
+	}
+	
 	loadOrders(){
 		this.props.screenProps.fetchOrders(this.props.screenProps.token, this.props.screenProps.user).then(() => {
 			return this.orders()
@@ -42,6 +46,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount() {
+		this.resetOrders();
 		this.loadOrders();
 		alert("componentDidMount");
 	}

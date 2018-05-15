@@ -53,14 +53,8 @@ class CartDetail extends Component {
 						</Text>
 					}
 					subtitle={
-<<<<<<< HEAD
 						<View style={{ paddingLeft : 5 }}>
 							<Text>Php <Text style={{ fontWeight: 'bold' }}>{Number(menu.menu.credit_cost).toFixed(2)}</Text></Text>
-=======
-						<View>
-							<Text>Php {menu.menu.credit_cost*menu.quantity}</Text>
-							<Text>Quantity: {menu.quantity}</Text>
->>>>>>> ffd4f3befa378a1100c8dced1e9f7ceb454441bc
 						</View>
 					}/>
 			</View>
