@@ -104,7 +104,7 @@ export function addMenuItem(token,cart){
 export function makeOrder(token,cart){
 	console.log(JSON.stringify(cart))
 	return (dispatch,getState) => {
-		return fetch(baseUrl+'add-menu-to-cart-api/', {
+		return fetch(baseUrl+'make-order-api/', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',

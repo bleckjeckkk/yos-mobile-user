@@ -56,7 +56,16 @@ class CartDetail extends Component {
 	}
 
 	onPress()	{
-		//this.props.screenProps.makeOrder(this.props.screenProps.token,)
+		const {params} = this.props.navigation.state;
+		const cartDetail = params ? params.cartDetail : null;
+		var cart = {
+			cart: cartDetail[0].cart,
+			payment_method: "Salary Deduction",
+			total_cost: 0,
+			user: this.props.user.id,
+		}
+		alert(cartDetail[0].cart)
+		this.props.screenProps.makeOrder(this.props.token,cart)
 		this.props.navigation.popToTop()
 	}
 	
