@@ -13,6 +13,7 @@ class Dashboard extends Component {
 		this.state = {
 			orders: ds,
 			selectedIndex : 0,
+			sortingBy : "All",
 			data: [],
 		}
 	}
@@ -80,7 +81,6 @@ class Dashboard extends Component {
 	}
 
 	updateIndex (selectedIndex) {
-		alert(selectedIndex)
 		this.setState({selectedIndex});
 		switch(selectedIndex){
 			case 0:	this.filterData("all");
@@ -92,28 +92,30 @@ class Dashboard extends Component {
 		}
 	}
 
-	filterData(data){
+	filterData(filterBy){
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.setState({
 			orders: ds,
 		})
-		switch(data){
+		switch(filterBy){
 			case "all"		: this.setState({
-								orders : this.state.orders.cloneWithRows(this.state.data)
+								orders : this.state.orders.cloneWithRows(this.state.data),
+								sortingBy : "all"
 							});
 							break;
 			case "notPaid" 	: this.setState({
-								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === false))
+								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === false)),
+								sortingBy : "not paid"
 							});
-			break;
+							break;
 			case "paid"		: this.setState({
-								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === true))
+								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === true)),
+								sortingBy : "paid"
 							});
-			break;
+							break;
 		}
 	}
 	render() {
-		const buttons = ['All', 'Not Paid', 'Paid']
   		const { selectedIndex } = this.state.selectedIndex
 		return (
 			<View style={[styles.mainContainer,{flex:1}]}>
@@ -122,9 +124,14 @@ class Dashboard extends Component {
 					<ButtonGroup
 						onPress={this.updateIndex.bind(this)}
 						selectedIndex={selectedIndex}
-						buttons={buttons}
+						buttons={['All', 'Not Paid', 'Paid']}
 						containerStyle={{height: 32}}
+						buttonStyle={{ backgroundColor : 'white' }}
+						selectedButtonStyle={{ backgroundColor : '#236EFF' }}
+						selectedTextStyle={{ color : 'white' }}
+						containerBorderRadius={200}
 					/>
+					<Text>Sorting by: {this.state.sortingBy}</Text>
 					<List containerStyle={{marginBottom: 20}}>
 						<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
 					</List>
