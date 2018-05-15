@@ -28,10 +28,17 @@ class CartDetail extends Component {
 			this.setState({
 				cartDetails: this.state.cartDetails.cloneWithRows(response)
 			})
+/* 			for(item in response){
+				console.log(response[item]);
+			} */
 		})
 	}
 
 	renderRow(menu, sectionId, rowId, hightlightRow) {
+		var itemCost = menu.quantity * menu.menu.credit_cost;
+		this.setState({ 
+			totalAmount: this.state.totalAmount + itemCost
+		});
 		return (
 			<View>
 				<ListItem 
@@ -55,7 +62,7 @@ class CartDetail extends Component {
 					<List>
 						<ListView dataSource={this.state.cartDetails} renderRow={this.renderRow.bind(this)}></ListView>
 					</List>
-					<Text style={{fontSize : 24, marginLeft: 5, marginTop: 10}}>Total: Php ???</Text>
+					<Text style={{fontSize : 24, marginLeft: 5, marginTop: 10}}>Total: Php {this.state.totalAmount}</Text>
 					<Button
 						raised
 						title="Confirm"
