@@ -19,10 +19,7 @@ class Dashboard extends Component {
 	static navigationOptions = {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
-		tabBarVisible : false,
-		headerLeft:(
-			<View />
-		),
+		//tabBarVisible : false,
 		headerRight: (
 			<Logout />
 		),
