@@ -76,7 +76,7 @@ class Cart extends Component {
 													alert("You can't add none");
 												}
 											}}
-											name='add'
+											name='add-shopping-cart'
 											type='MaterialCommunityIcons'
 											color='#236EFF'
 										/>
@@ -126,55 +126,68 @@ class Cart extends Component {
 		return(
 			<View style={{flex:1}}>
 				<ScrollView style={{flex:1}}>
-					<Button 
-						title="Checkout"
-						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})}
-						backgroundColor='#236EFF'
-						disabled = {!this.state.okToCheckout}
-						style={{ paddingTop : 10 }}
-					/>
-					
-					<View style={{ paddingHorizontal : 10}}>
-					<Dropdown
-						label="Menu Set Schedule"
-						data={this.state.menuDates}
-						onChangeText={(value,index) => {
-							this.setState({ 
-								selectedDate : value,
-								dateID : this.state.menuDates[index].id,
-								cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-							});	
-							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
-							.then((response) => {
-								var cart_id = this.props.cartID;
-								Object.keys(response).map(function(key){
-									ordersv[key] = {
-										cart: JSON.stringify(cart_id),
-										cut_off_time: response[key].cut_off_time,
-										id: response[key].id,
-										is_active: response[key].is_active,
-										is_deleted: response[key].is_deleted,
-										menu: response[key].menu,
-										menu_set_schedule_id: response[key].menu_set_schedule_id,
-										serving_schedule_id: response[key].serving_schedule_id,
-										quantity: 0,
-									}
-								})	
-								ordersv.sort((a,b) => a.serving_schedule_id - b.serving_schedule_id)
-								this.setState({
-									cartInput : this.state.cartInput.cloneWithRows(ordersv),
-									data : ordersv,
-								});
-							})				
-						}}
-					/>
+					<View style={{flexDirection: 'row', flex: .20}}>
+						<View style={{flex : .60, paddingLeft: 10}}>
+							<Dropdown
+								label="Menu Set Schedule"
+								data={this.state.menuDates}
+								onChangeText={(value,index) => {
+									this.setState({ 
+										selectedDate : value,
+										dateID : this.state.menuDates[index].id,
+										cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+									});	
+									this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
+									.then((response) => {
+										var cart_id = this.props.cartID;
+										Object.keys(response).map(function(key){
+											ordersv[key] = {
+												cart: JSON.stringify(cart_id),
+												cut_off_time: response[key].cut_off_time,
+												id: response[key].id,
+												is_active: response[key].is_active,
+												is_deleted: response[key].is_deleted,
+												menu: response[key].menu,
+												menu_set_schedule_id: response[key].menu_set_schedule_id,
+												serving_schedule_id: response[key].serving_schedule_id,
+												quantity: 0,
+											}
+										})	
+										ordersv.sort((a,b) => a.serving_schedule_id - b.serving_schedule_id)
+										this.setState({
+											cartInput : this.state.cartInput.cloneWithRows(ordersv),
+											data : ordersv,
+										});
+									})				
+								}}
+							/>
+						</View>
+						<View style={{flex: .40}}>
+							<Button
+								raised
+								icon={{name: 'shopping-cart'}}
+								title='CHECKOUT'
+								backgroundColor='#236EFF'
+								disabled = {!this.state.okToCheckout}
+								style = {{ paddingVertical : 20}}
+								onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})} />
+{/* 							<Button 
+								title="Checkout"
+								onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})}
+								backgroundColor='#236EFF'
+								disabled = {!this.state.okToCheckout}
+								style = {{ paddingVertical : 20}}
+							/> */}
+						</View>
 					</View>
+					<View style={{flex : .80}}>
 					<List containerStyle={{marginBottom: 20}}>
 						<ListView 
 							dataSource={this.state.cartInput} 
 							renderRow={this.renderRow.bind(this)}
 						/>
 					</List>
+					</View>
 				</ScrollView>
 			</View>
 		)
