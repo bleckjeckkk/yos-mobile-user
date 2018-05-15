@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, ListView, ScrollView  } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import Swipeout from 'react-native-swipeout';
 
 class CartDetail extends Component {
 	constructor() {
@@ -38,9 +39,16 @@ class CartDetail extends Component {
 		})
 	}
 
+	deletThis(id){
+		alert("delete item id: " + id);
+	}
+
 	renderRow(menu, sectionId, rowId, hightlightRow) {
+		const swipeoutBtns = [
+			{ text: 'Remove', backgroundColor: 'red', onPress : this.deletThis.bind(this,menu.id) },
+		]
 		return (
-			<View>
+			<Swipeout right={swipeoutBtns}>
 				<ListItem 
 					hideChevron={true}
 					key={menu.id}
@@ -57,7 +65,7 @@ class CartDetail extends Component {
 							<Text>Php <Text style={{ fontWeight: 'bold' }}>{Number(menu.menu.credit_cost).toFixed(2)}</Text></Text>
 						</View>
 					}/>
-			</View>
+			</Swipeout>
 		)
 	}
 

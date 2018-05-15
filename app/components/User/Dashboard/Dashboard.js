@@ -36,7 +36,6 @@ class Dashboard extends Component {
 			console.log(orders);
 			this.__serializeResponse(orders);
 		})
-		alert("loadOrders");
 	}
 
 	componentDidMount() {
@@ -46,7 +45,6 @@ class Dashboard extends Component {
 	__serializeResponse(response){
 		//this.$.progress.disabled = true;
 		let result = Object.keys(response).map(function(key){
-			console.log(response[key]["value"]);
 			return {
 				value : response[key]["value"]
 			}

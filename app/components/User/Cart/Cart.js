@@ -57,17 +57,28 @@ class Cart extends Component {
 									justifyContent: 'space-between',
 								}}>
 									<View style={{flex: .75}}>
-										<Text style={styles.info}>ID: {cart.id}</Text>
-										<Text style={styles.info}>Cost: {cart.menu.credit_cost}</Text>
-										<Text style={styles.info}>Serving Schedule: {cart.menu.serving_schedule_name}</Text>
-										<Text style={styles.info}>Current Quantity: {cart.quantity}</Text>
+										{/* <Text style={styles.info}>ID: {cart.id}</Text> */}
+										<Text style={styles.info}>
+											Cost: <Text style={{fontWeight : 'bold'}}>{cart.menu.credit_cost}</Text>
+										</Text>
+										<Text style={styles.info}>
+											Serving Schedule: <Text style={{fontWeight : 'bold'}}>{cart.menu.serving_schedule_name}</Text>
+										</Text>
 									</View>
 									<View style={{flex : .25}}>
 										<Icon
 											raised
-											onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}
+											onPress={()=> {
+												if(cart.quantity > 0){
+													this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)
+													this.setState({ okToCheckout : true });
+												}else{
+													alert("You can't add one");
+												}
+											}}
 											name='add'
 											type='MaterialCommunityIcons'
+											color='#236EFF'
 										/>
 										<Dropdown
 											label="Quantity"
@@ -75,8 +86,10 @@ class Cart extends Component {
 												[{value : 0},{value : 1},{value : 2},{value : 3},{value : 4},{value : 5},
 													{value : 6},{value : 7},{value : 8},{value : 9},{value : 10}]
 											}
-											value = {cart.menu.quantity}
-											onChangeText={(value) => this.quantityChanger(cart.id,value)}
+											value = {cart.quantity}
+											onChangeText={(value) => {
+												this.quantityChanger(cart.id,value)
+											}}
 										/>
 									</View>
 								</View>
@@ -89,7 +102,7 @@ class Cart extends Component {
 	}
 
 	quantityChanger(itemID,value){
-		this.setState({cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}) })
+		//this.setState({ cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}) })
 		newData = this.state.data.slice();
 		for(data in newData){
 			if(newData[data].id === itemID){
@@ -118,18 +131,18 @@ class Cart extends Component {
 						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})}
 						backgroundColor='#236EFF'
 						disabled = {!this.state.okToCheckout}
+						style={{ paddingTop : 10 }}
 					/>
 					
+					<View style={{ paddingHorizontal : 10}}>
 					<Dropdown
 						label="Menu Set Schedule"
 						data={this.state.menuDates}
-						
 						onChangeText={(value,index) => {
 							this.setState({ 
 								selectedDate : value,
 								dateID : this.state.menuDates[index].id,
 								cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-								okToCheckout : true,
 							});	
 							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
 							.then((response) => {
@@ -144,7 +157,7 @@ class Cart extends Component {
 										menu: response[key].menu,
 										menu_set_schedule_id: response[key].menu_set_schedule_id,
 										serving_schedule_id: response[key].serving_schedule_id,
-										quantity: "1",
+										quantity: 0,
 									}
 								})	
 								ordersv.sort((a,b) => a.serving_schedule_id - b.serving_schedule_id)
@@ -155,6 +168,7 @@ class Cart extends Component {
 							})				
 						}}
 					/>
+					</View>
 					<List containerStyle={{marginBottom: 20}}>
 						<ListView 
 							dataSource={this.state.cartInput} 
