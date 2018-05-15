@@ -67,6 +67,7 @@ class Dashboard extends Component {
 						<View style={{paddingLeft : 5}}>
 							<Text>Payment Method: {order.payment_method}</Text>
 							<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
+							<Text style={{fontWeight : 'bold'}}>{ order.paid ? "Paid" : "Not Paid"}</Text>
 						</View>
 					}
 			/>
