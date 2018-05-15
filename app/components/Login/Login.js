@@ -52,9 +52,11 @@ class Login extends Component {
     this.props.getAuthToken(this.state);
   }
 
+  componentWillMount(){
+    this.props.resetAuthToken()
+  }
+
   componentWillReceiveProps(nextProps){
-    console.log("props");
-    console.log(nextProps);
     if(nextProps.accept && !nextProps.fail){
       if(this.props.user.is_Staff){
         this.props.navigation.navigate('AdminMain');
@@ -111,6 +113,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
 	return {
+    token: state.Token,
     user : state.User,
     accept : state.AuthAccept,
     fail : state.AuthCheck,

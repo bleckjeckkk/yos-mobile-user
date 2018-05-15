@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, View, Text, StyleSheet, ListView, ScrollView  } from 'react-native';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 class CartDetail extends Component {
 	constructor() {
@@ -71,7 +72,13 @@ class CartDetail extends Component {
 			user: this.props.user.id,
 		};
 		this.props.screenProps.makeOrder(this.props.token,cart);
-		this.props.navigation.navigate('Dashboard');
+		this.props.navigation.dispatch(new NavigationActions.reset({
+			index: 0,
+			key: null,
+			actions: [
+				NavigationActions.navigate({ routeName: 'Dashboard' }),
+			]
+		  }))
 	}
 	
 	render() {
