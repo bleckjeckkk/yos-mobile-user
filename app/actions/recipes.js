@@ -65,7 +65,6 @@ export function fetchMenuScheduleDetails(token,menuID){
 	}
 }
 export function fetchCartDetails(token,order) {
-	alert('hey')
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'cart-detail-api/'+order.cart+'/', {
 			method: 'GET',
@@ -83,6 +82,26 @@ export function fetchCartDetails(token,order) {
 }
 
 export function addMenuItem(token,cart){
+	console.log(JSON.stringify(cart))
+	return (dispatch,getState) => {
+		return fetch(baseUrl+'add-menu-to-cart-api/', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'authorization' : 'JWT ' + token,
+			},
+			body: JSON.stringify(cart)
+		})
+		.then((response) => console.log(response))
+		.catch((error) => {
+			alert(error)
+			console.log(error)
+		})
+	}
+}
+
+export function makeOrder(token,cart){
 	console.log(JSON.stringify(cart))
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'add-menu-to-cart-api/', {
