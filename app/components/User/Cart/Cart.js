@@ -18,6 +18,7 @@ class Cart extends Component {
 			data: [],
 			cartInput: ds ,
 			dateID : 'ID',
+			okToCheckout : false,
 		}
 	}
 
@@ -116,6 +117,7 @@ class Cart extends Component {
 						title="Checkout"
 						onPress={() => this.props.navigation.navigate('Checkout', {cartDetail:this.state.data})}
 						backgroundColor='#236EFF'
+						disabled = {!this.state.okToCheckout}
 					/>
 					
 					<Dropdown
@@ -126,7 +128,8 @@ class Cart extends Component {
 							this.setState({ 
 								selectedDate : value,
 								dateID : this.state.menuDates[index].id,
-								cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+								cartInput : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+								okToCheckout : true,
 							});	
 							this.props.screenProps.fetchMenuScheduleDetails(this.props.screenProps.token,this.state.menuDates[index].id)
 							.then((response) => {
