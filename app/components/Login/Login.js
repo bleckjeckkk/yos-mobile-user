@@ -73,7 +73,7 @@ class Login extends Component {
       <SafeAreaView style={styles.mainContainer}>
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
-            <Image source={Images.logo} style={styles.logo} />
+            <Image source={Images.logo} style={styles.logo} height={200} weight={200} />
           </View>
           <View style={styles.section}>
 
