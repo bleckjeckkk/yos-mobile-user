@@ -100,17 +100,17 @@ class Dashboard extends Component {
 		switch(filterBy){
 			case "all"		: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data),
-								sortingBy : "all"
+								sortingBy : "all",
 							});
 							break;
 			case "notPaid" 	: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === false)),
-								sortingBy : "not paid"
+								sortingBy : "not paid",
 							});
 							break;
 			case "paid"		: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === true)),
-								sortingBy : "paid"
+								sortingBy : "paid",
 							});
 							break;
 		}
@@ -129,7 +129,7 @@ class Dashboard extends Component {
 						buttonStyle={{ backgroundColor : 'white' }}
 						selectedButtonStyle={{ backgroundColor : '#236EFF' }}
 						selectedTextStyle={{ color : 'white' }}
-						containerBorderRadius={200}
+						containerBorderRadius={20}
 					/>
 					<Text>Sorting by: {this.state.sortingBy}</Text>
 					<List containerStyle={{marginBottom: 20}}>
