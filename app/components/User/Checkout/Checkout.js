@@ -35,10 +35,6 @@ class CartDetail extends Component {
 	}
 
 	renderRow(menu, sectionId, rowId, hightlightRow) {
-		var itemCost = menu.quantity * menu.menu.credit_cost;
-		this.setState({ 
-			totalAmount: this.state.totalAmount + itemCost
-		});
 		return (
 			<View>
 				<ListItem 
@@ -53,6 +49,11 @@ class CartDetail extends Component {
 			</View>
 		)
 	}
+
+	onPress()	{
+		//this.props.screenProps.makeOrder(this.props.screenProps.token,)
+		this.props.navigation.popToTop()
+	}
 	
 	render() {
 		return(
@@ -66,7 +67,7 @@ class CartDetail extends Component {
 					<Button
 						raised
 						title="Confirm"
-						onPress={() => this.props.navigation.popToTop() }
+						onPress={this.onPress.bind(this)}
 						backgroundColor='#236EFF'
 					/>
 				</ScrollView>
@@ -77,7 +78,11 @@ class CartDetail extends Component {
 
 
 function mapStateToProps(state) {
-	return { }
+	return { 
+		token : state.Token,
+		cartID : state.CartID,
+		user: state.User
+	}
 }
 
 export default connect(mapStateToProps)(CartDetail);
