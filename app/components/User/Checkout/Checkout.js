@@ -28,9 +28,14 @@ class CartDetail extends Component {
 			this.setState({
 				cartDetails: this.state.cartDetails.cloneWithRows(response)
 			})
-/* 			for(item in response){
-				console.log(response[item]);
-			} */
+ 			for(item in response){
+				menuItem = response[item];
+				console.log("================================");
+				console.log(menuItem.menu.name);
+				console.log("Quantity: " + menuItem.quantity);
+				console.log("Cost: " + menuItem.menu.credit_cost);
+				this.setState({ totalAmount : this.state.totalAmount + (menuItem.quantity * menuItem.menu.credit_cost)}) 
+			}
 		})
 	}
 
