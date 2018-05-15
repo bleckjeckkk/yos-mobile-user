@@ -20,6 +20,9 @@ class Dashboard extends Component {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		tabBarVisible : false,
+		headerLeft:(
+			<View />
+		),
 		headerRight: (
 			<Logout />
 		),
