@@ -20,22 +20,13 @@ class Dashboard extends Component {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		tabBarVisible : false,
-		headerLeft: (
-			<Button 
-				title="Refresh"
-				onPress={() => this.loadOrders()}
-			/>
-		),
 		headerRight: (
 			<Logout />
 		),
 	};
 
-	resetOrders(){
-		this.props.screenProps.resetOrders().then
-	}
-	
 	loadOrders(){
+		this.props.screenProps.resetOrders()
 		this.props.screenProps.fetchOrders(this.props.screenProps.token, this.props.screenProps.user).then(() => {
 			return this.orders()
 		}).then((orders) => {
@@ -46,9 +37,7 @@ class Dashboard extends Component {
 	}
 
 	componentDidMount() {
-		this.resetOrders();
 		this.loadOrders();
-		alert("componentDidMount");
 	}
 
 	__serializeResponse(response){
