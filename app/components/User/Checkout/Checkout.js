@@ -47,7 +47,7 @@ class CartDetail extends Component {
 					title={menu.menu.name}
 					subtitle={
 						<View>
-							<Text>Php {menu.menu.credit_cost}</Text>
+							<Text>Php {menu.menu.credit_cost*menu.quantity}</Text>
 							<Text>Quantity: {menu.quantity}</Text>
 						</View>
 					}/>
@@ -61,7 +61,7 @@ class CartDetail extends Component {
 		var cart = {
 			cart: cartDetail[0].cart,
 			payment_method: "Salary Deduction",
-			total_cost: 0,
+			total_cost: this.state.totalAmount,
 			user: this.props.user.id,
 		}
 		alert(cartDetail[0].cart)

@@ -66,7 +66,7 @@ class Cart extends Component {
 										<Icon
 											raised
 											onPress={()=> {this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)}}
-											name='cart-plus'
+											name='add'
 											type='MaterialCommunityIcons'
 										/>
 										<Dropdown
