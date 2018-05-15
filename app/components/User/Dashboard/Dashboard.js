@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight, ScrollView } from 'react-native';
-import { List, ListItem, Button, Card } from 'react-native-elements';
+import { List, ListItem, Button, Card, ButtonGroup } from 'react-native-elements';
 import { connect } from 'react-redux';
 import ActionButton from 'react-native-action-button';
 import Logout from '../../Logout/Logout';
@@ -12,6 +12,8 @@ class Dashboard extends Component {
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
 			orders: ds,
+			selectedIndex : 0,
+			data: [],
 		}
 	}
 
@@ -46,7 +48,10 @@ class Dashboard extends Component {
 				value : response[key]["value"]
 			}
 		})
-		this.setState({orders : this.state.orders.cloneWithRows(result[0].value.data)});
+		this.setState({
+			orders : this.state.orders.cloneWithRows(result[0].value.data),
+			data : result[0].value.data
+		});
 	}
 
 	orders() {
@@ -67,18 +72,59 @@ class Dashboard extends Component {
 						<View style={{paddingLeft : 5}}>
 							<Text>Payment Method: {order.payment_method}</Text>
 							<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
-							<Text style={{fontWeight : 'bold'}}>{ order.paid ? "Paid" : "Not Paid"}</Text>
+							<Text style={{fontWeight : 'bold', color : order.paid ? "green" : "red"}}>{ order.paid ? "Paid" : "Not Paid"}</Text>
 						</View>
 					}
 			/>
 		)
 	}
 
+	updateIndex (selectedIndex) {
+		alert(selectedIndex)
+		this.setState({selectedIndex});
+		switch(selectedIndex){
+			case 0:	this.filterData("all");
+					break;
+			case 1: this.filterData("notPaid");
+					break;
+			case 2:	this.filterData("paid");
+					break;
+		}
+	}
+
+	filterData(data){
+		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+		this.setState({
+			orders: ds,
+		})
+		switch(data){
+			case "all"		: this.setState({
+								orders : this.state.orders.cloneWithRows(this.state.data)
+							});
+							break;
+			case "notPaid" 	: this.setState({
+								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === false))
+							});
+			break;
+			case "paid"		: this.setState({
+								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === true))
+							});
+			break;
+		}
+	}
 	render() {
+		const buttons = ['All', 'Not Paid', 'Paid']
+  		const { selectedIndex } = this.state.selectedIndex
 		return (
 			<View style={[styles.mainContainer,{flex:1}]}>
 				<ScrollView style={{flex:1}}>
-					<Text style={{fontSize : 32, marginLeft: 5, marginTop: 10}}>Recent Orders</Text>
+					<Text style={{fontSize : 32, marginLeft: 5, marginTop: 10, fontWeight:'bold'}}>Recent Orders</Text>
+					<ButtonGroup
+						onPress={this.updateIndex.bind(this)}
+						selectedIndex={selectedIndex}
+						buttons={buttons}
+						containerStyle={{height: 32}}
+					/>
 					<List containerStyle={{marginBottom: 20}}>
 						<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
 					</List>
