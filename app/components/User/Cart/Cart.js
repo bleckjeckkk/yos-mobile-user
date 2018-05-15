@@ -59,7 +59,7 @@ class Cart extends Component {
 									<View style={{flex: .75}}>
 										{/* <Text style={styles.info}>ID: {cart.id}</Text> */}
 										<Text style={styles.info}>
-											Cost: <Text style={{fontWeight : 'bold'}}>{cart.menu.credit_cost}</Text>
+											Cost: Php <Text style={{fontWeight : 'bold'}}>{cart.menu.credit_cost}</Text>
 										</Text>
 										<Text style={styles.info}>
 											Serving Schedule: <Text style={{fontWeight : 'bold'}}>{cart.menu.serving_schedule_name}</Text>
