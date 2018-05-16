@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight, ScrollView } from 'react-native';
-import { List, ListItem, Button, Card, ButtonGroup } from 'react-native-elements';
+import { List, ListItem, Button, Card, ButtonGroup, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import ActionButton from 'react-native-action-button';
 import Logout from '../../Logout/Logout';
@@ -22,6 +22,12 @@ class Dashboard extends Component {
 		title: 'Dashboard',
 		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
 		//tabBarVisible : false,
+		headerLeft: <Icon 
+						name='refresh'
+						color='blue'
+						iconStyle={{padding: 10}}
+						onPress={() => this.setState(this.state)}
+						/>,
 		headerRight: (
 			<Logout />
 		),

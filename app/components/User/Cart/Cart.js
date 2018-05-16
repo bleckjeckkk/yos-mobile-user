@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker, TextInput } from 'react-native';
+import { Alert, StyleSheet, View, Text, AppRegistry, ListView, TouchableHighlight, SectionList, ScrollView, Picker, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem, Button, Card, Header, Icon } from 'react-native-elements';
 import Swipeout from 'react-native-swipeout';
@@ -70,10 +70,20 @@ class Cart extends Component {
 											raised
 											onPress={()=> {
 												if(cart.quantity > 0){
-													this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)
-													this.setState({ okToCheckout : true });
+													Alert.alert(
+														'Are you sure?',
+														'',
+														[
+														  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+														  {text: 'OK', onPress: () => {
+															this.props.screenProps.addMenuItem(this.props.screenProps.token,cart)
+															this.setState({ okToCheckout : true });
+														  }},
+														],
+														{ cancelable: false }
+													  )
 												}else{
-													alert("You can't add none");
+													Alert.alert('',"You can't add none");
 												}
 											}}
 											name='add-shopping-cart'
