@@ -1,3 +1,4 @@
+import {Alert} from 'react-native'
 import * as types from './types';
 import Api from '../lib/api';
 
@@ -27,7 +28,7 @@ export function getCartID(token,user){
 	}
 }
 
-export function fetchMenus(token){
+export function fetchMenuSchedules(token){
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'menu-schedules-api/', {
 			method: 'GET',
@@ -46,9 +47,7 @@ export function fetchMenus(token){
 //     "menu-schedule-details-api/"
 export function fetchMenuScheduleDetails(token,menuID){
 	return (dispatch,getState) => {
-		console.log(menuID);
 		// `${baseUrl}menu-schedule-details-api/${menuID}/`
-
 		console.log(baseUrl+'menu-schedule-details-api/'+menuID);
 		return fetch(baseUrl+'menu-schedule-details-api/'+menuID+"/", {
 			method: 'GET',
@@ -64,6 +63,7 @@ export function fetchMenuScheduleDetails(token,menuID){
 		})
 	}
 }
+
 export function fetchCartDetails(token,order) {
 	return (dispatch,getState) => {
 		return fetch(baseUrl+'cart-detail-api/'+order.cart+'/', {
@@ -122,40 +122,6 @@ export function makeOrder(token,cart){
 	}
 }
 
-				/* cart: cart.cart,
-				cut_off_time: cart.cut_off_time,
-				id: cart.id,
-				is_active: cart.is_active,
-				is_deleted: cart.is_deleted,
-				menu: cart.menu,
-				menu_set_schedule_id: cart.menu_set_schedule_id,
-				quantity: 0,
-				serving_schedule_id: cart.serving_schedule_id, */
-/* 
-export function fetchMenus() {
-	return (dispatch, getState) => {
-		return Api.get('menu-api')
-		.then((resp) => {
-			dispatch(setSearchedRecipes({ recipes: resp }));
-		})
-		.catch((ex) => {
-			console.log(ex);
-		})
-	}
-} */
-/*
-export function fetchOrders() { 
-	return (dispatch, getState) => {
-		return  Api.get('order-api')
-		.then((response) => {
-			dispatch(setOrders({ orders: response }))
-		})
-		.catch((ex) => {
-			console.log(ex);
-		})
-	}
-}
-*/
 export function fetchOrders(token, user) { 
 	return (dispatch, getState) => {
 		console.log("FETCH ORDERS");
@@ -193,7 +159,7 @@ export function getAuthToken(data) {
 			dispatch(setFail({ value : false }));
 		})
 		.catch((ex) => {
-			alert("Incorrect login credentials!");
+			Alert.alert('',"Incorrect login credentials!");
 			dispatch(setAccepted({ value : false }));
 			dispatch(setFail({ value : true }));
 			console.log("!!!" + JSON.stringify(ex));
@@ -212,18 +178,6 @@ export function fetchEmployeeCarts(token,carts) {
 		return Api.post('order-carts-api/', {token:token}, JSON.stringify({carts: carts}))
 		.then((response) => {
 			dispatch(setEmployeeCarts({ carts: response }))
-		})
-		.catch((ex) => {
-			console.log(ex);
-		})
-	}
-}
-
-export function fetchOrdersSummary(token) { 
-	return (dispatch, getState) => {
-		return  Api.post('order-summary-report-api/', token)
-		.then((response) => {
-			dispatch(setOrdersSummary({ ordersSummary: response }))
 		})
 		.catch((ex) => {
 			console.log(ex);
@@ -252,6 +206,18 @@ export function completeOrderDetail(orderDetailId) {
 		.catch((ex) => {
 			console.log(ex);
 		})	
+	}
+}
+
+export function fetchOrdersSummary(token) { 
+	return (dispatch, getState) => {
+		return  Api.post('order-summary-report-api/', token)
+		.then((response) => {
+			dispatch(setOrdersSummary({ ordersSummary: response }))
+		})
+		.catch((ex) => {
+			console.log(ex);
+		})
 	}
 }
 
@@ -302,20 +268,6 @@ export function setCartID( { id } ){
 	}
 }
 
-
-
-
-
-
-
-
-export function setSearchedRecipes( { recipes } ) {
-	return {
-		type: types.SET_SEARCHED_RECIPES,
-		recipes
-	}
-}
-
 export function setOrderSummaryDetail( { orderSummaryDetail } ) {
 	return {
 		type: types.SET_ORDER_SUMMARY_DETAIL,
@@ -347,5 +299,12 @@ export function setEmployeeCarts( { carts } ) {
 export function addRecipe() {
 	return {
 		type: types.ADD_RECIPE,
+	}
+}
+
+export function setSearchedRecipes( { recipes } ) {
+	return {
+		type: types.SET_SEARCHED_RECIPES,
+		recipes
 	}
 }

@@ -2,25 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { StackNavigator, TabNavigator, TabBarBottom, addNavigationHelpers } from 'react-navigation';
+import { createStackNavigator, TabNavigator, TabBarBottom, addNavigationHelpers } from 'react-navigation';
+import Dashboard from '../components/User/Dashboard/Dashboard';
+import Cart  from '../components/User/Cart/Cart';
+import OrderDetail from '../components/User/OrderDetail/OrderDetail';
+import Checkout  from '../components/User/Checkout/Checkout';
 
-import DashStack from '../navigators/UserStack';
-import Cart from '../components/User/Cart/Cart';
-import Checkout from '../components/User/Checkout/Checkout';
-import UserStack from '../navigators/UserStack';
+const UserStack = createStackNavigator(
+	{
+		Dashboard: Dashboard,
+		Cart: Cart,
+		OrderDetail : OrderDetail,
+		Checkout: Checkout,
+	},{
+		initialRouteName : 'Dashboard',
+		headerMode : 'screen',
+});
 
 class AppContainer extends Component {
+	static router = UserStack.router;
+
 	constructor(props){
 		super(props);
 	}
 	render() {
 		const propsScreen = {...this.props}
 		return (
-			<UserStack screenProps={propsScreen}/>
+			<UserStack screenProps={propsScreen} navigation={this.props.navigation}/>
 		)
 	}
 }
-
 
 function mapStateToProps(state) {
 	return {

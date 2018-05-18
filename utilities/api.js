@@ -30,20 +30,12 @@ const api = {
 	/** fetch Menu API
 	 * 
 	 */
-	fetchMenus(token) {
-		console.log(token);
-		return Api.post('menu-api', token)
-		.then((response) => response.json())
-		.catch((error) => console.log(error));
-
-
 	/* 
 		return fetch(baseUrl+'menu-api')
 		.then((response) => response.json())
 		.catch((error) => {
 			console.log(error)
 		}) */
-	},
 	/** fetch Carts of the Associated Order
 	 *  
 	 */

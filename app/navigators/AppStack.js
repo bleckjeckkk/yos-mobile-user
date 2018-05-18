@@ -1,14 +1,12 @@
 import Login from '../components/Login/Login';
-import MainApp from '../containers/AppContainer';
+//import MainApp from '../containers/AppContainer';
 import UserApp from '../containers/UserAppContainer';
-import {StackNavigator} from 'react-navigation';
-import Logout from '../components/Logout/Logout';
+import { createSwitchNavigator } from 'react-navigation';
 
-const StackNavigate = StackNavigator({
-    Login: {screen: Login},
-    AdminMain : {screen: MainApp},
-    UserMain : {screen: UserApp},
-    Logout: {screen: Logout},
+const StackNavigate = createSwitchNavigator({
+    Login: Login,
+    //AdminMain : MainApp,
+    UserMain : UserApp,
   },{
     initialRouteName : 'Login',
     headerMode : 'none',

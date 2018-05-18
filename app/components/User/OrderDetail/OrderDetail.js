@@ -10,46 +10,42 @@ class OrderDetail extends Component {
 		super();
 		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		this.state = {
-			cartDetails: ds,
+			orderDetails: ds,
 		}
 	}		
 
 	static navigationOptions = {
-		title: 'Order Detail'
+		title: 'Order Detail',
+		headerStyle: {
+			backgroundColor: '#8eb3fb'
+		  },
 	}
 
 	componentDidMount() {
-/*  		const {params} = this.props.navigation.state;
-		const cartDetail = params ? params.cartDetail : null;
-		this.setState({cartDetails: this.state.cartDetails.cloneWithRows(cartDetail)}) */
 		const {params} = this.props.navigation.state;
-		console.log(params);
-		console.log(params.order.cart_id);
-		api.fetchCartDetails(params.order,this.props.token)
-		.then((response) => console.log(response));
+		const order = params ? params.orderDetail : null;
+		console.log(order)
+		this.setState({
+			orderDetails: order
+		})
+
 	}
 
-	renderRow(cartDetail, sectionId, rowId, hightlightRow) {
-		return (
-			<List>
-				<ListView dataSource={cartDetail} renderRow={this.renderMenuRow.bind(this)}></ListView>
-			</List>
-		)
-	}
-	
-	renderMenuRow(menu, sectionId, rowId, hightlightRow) {
-		return (
-			<View>
-				<ListItem key={menu.id}  title={menu.name} />
-			</View>
-		)
-	}
-	
 	render() {
 		return(
-			<List>
-				<ListView dataSource={this.state.cartDetails} renderRow={this.renderRow.bind(this)}></ListView>
-			</List>
+			<View>
+				<Text>{this.state.orderDetails.cart_id}</Text>
+				<Text>{this.state.orderDetails.created_on}</Text>
+				<Text>{this.state.orderDetails.id}</Text>
+				<Text>{this.state.orderDetails.is_active}</Text>
+				<Text>{this.state.orderDetails.is_deleted}</Text>
+				<Text>{this.state.orderDetails.name}</Text>
+				<Text>{this.state.orderDetails.paid}</Text>
+				<Text>{this.state.orderDetails.payment_method}</Text>
+				<Text>{this.state.orderDetails.total_cost}</Text>
+				<Text>{this.state.orderDetails.transaction_id}</Text>
+				<Text>{this.state.orderDetails.user_id}</Text>
+			</View>
 		)
 	}
 }

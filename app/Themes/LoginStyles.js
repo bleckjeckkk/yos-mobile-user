@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from './'
+import { Metrics, ApplicationStyles, Colors } from './'
 import {
   Platform,
 } from "react-native";
@@ -10,12 +10,14 @@ const viewPadding = 10;
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    paddingBottom: Metrics.baseMargin
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
   },
   logo: {
-    marginTop: Metrics.doubleSection,
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
+    width: 300,
     resizeMode: 'contain'
   },
   centered: {
@@ -27,6 +29,33 @@ export default StyleSheet.create({
     paddingLeft: 10,
     borderColor: "gray",
     borderWidth: isAndroid ? 0 : 1,
-    width: "100%"
+    width: "80%"
   },
+    loginSquare: {
+    backgroundColor: Colors.background,
+    opacity: 0.80,
+    height: 400,
+    width: 300,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  loginHeader: {
+    alignItems: 'center',
+    width: '100%',
+    height: 150,
+  },
+  loginButton: {
+    marginTop: 10,
+    padding: 10,
+    width: '100%',
+    backgroundColor: '#236EFF',
+  },
+  titleCart: {
+	  fontWeight: 'bold',
+	  fontSize: 20,
+  },
+  info : {
+		fontSize: 16,
+	},
 })

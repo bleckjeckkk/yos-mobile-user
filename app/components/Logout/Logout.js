@@ -1,27 +1,18 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { withNavigation, NavigationActions } from 'react-navigation';
 
 class Logout extends React.Component {
   render() {
-    return <Button title="Logout" onPress={() => { this.props.navigation.dispatch(new NavigationActions.reset({
-      index: 0,
-      key: null,
-      actions: [
-          NavigationActions.navigate({ routeName: 'Login' }),
-      ]
-    })) }} />;
+    return <Icon 
+                name='exit-to-app'
+                size= {35}
+                color= 'blue' 
+                containerStyle={{paddingRight:10}}
+                type='MaterialCommunityIcons' 
+                title="Logout" 
+                onPress={() => { this.props.navigation.navigate('Login') }} />;
   }
 }
 
-// withNavigation returns a component that wraps MyBackButton and passes in the
-// navigation prop
 export default withNavigation(Logout);
-
-/* this.props.navigation.dispatch(new NavigationActions.reset({
-  index: 1,
-  actions: [
-      NavigationActions.navigate({ routeName: 'HomeTabs' }),
-      NavigationActions.navigate({ routeName: 'FeedbackForm'})
-  ]
-})); */

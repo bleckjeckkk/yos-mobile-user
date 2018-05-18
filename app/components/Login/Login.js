@@ -11,7 +11,7 @@ import {
   AppRegistry,
   SafeAreaView,
 } from 'react-native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { List, ListItem, Button, Card } from 'react-native-elements';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../actions';
@@ -59,7 +59,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps){
     if(nextProps.accept && !nextProps.fail){
       if(this.props.user.is_Staff){
-        this.props.navigation.navigate('AdminMain');
+        //this.props.navigation.navigate('AdminMain');
         this.setState({loading : false});
       }else{
         this.props.navigation.navigate('UserMain');
@@ -72,40 +72,47 @@ class Login extends Component {
 
   render () {
     return (
-      <SafeAreaView style={styles.mainContainer}>
-        <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.logo} style={styles.logo} height={200} weight={200} />
-          </View>
-          <View style={styles.section}>
+        <SafeAreaView style={styles.mainContainer}>
+          <Image source={Images.background} style={styles.backgroundImage} blurRadius={2}/>
+          {/* <View style={styles.centered}>
+                <Image source={Images.logo} style={styles.logo} height={200} weight={200} />
+          </View> */}
+          <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+            <View style={styles.loginSquare}>
+              <View style={styles.loginHeader}>
+                <Image source={Images.logo} style={styles.logo} height={200} weight={200} />
+              </View>
+                <Text style={styles.sectionLogin}>User</Text>
+                <TextInput 
+                  placeholder='username'
+                  keyboardType='email-address'
+                  keyboardAppearance='dark'
+                  style={styles.textInput}
+                  value={this.state.username}
+                  onChangeText={(value) => this.onChangeName(value)}
+                />
 
-            <Text style={styles.sectionLogin}>User</Text>
-            <TextInput 
-              placeholder='username'
-              style={styles.textInput}
-              value={this.state.username}
-              onChangeText={(value) => this.onChangeName(value)}
-            />
-
-            <Text style={styles.sectionLogin}>Password</Text>
-            <TextInput 
-              placeholder='password'
-              style={styles.textInput}
-              secureTextEntry = {true}
-              onChangeText={(value) => this.onChangePassword(value)}
-            />
-
-          </View>
-          <Button 
-            disabled = {this.state.loading}
-            clear = {true}
-            loading = {this.state.loading}
-            title="Log-in"
-            onPress={this.onSubmit.bind(this)}
-            backgroundColor='#236EFF'
-            />
-        </ScrollView>
-      </SafeAreaView>
+                <Text style={styles.sectionLogin}>Password</Text>
+                <TextInput 
+                  placeholder='password'
+                  style={styles.textInput}
+                  keyboardAppearance='dark'
+                  secureTextEntry = {true}
+                  onChangeText={(value) => this.onChangePassword(value)}
+                />
+                <Button 
+                  raised
+                  disabled = {this.state.loading}
+                  clear = {true}
+                  loading = {this.state.loading}
+                  title="Log-in"
+                  onPress={this.onSubmit.bind(this)}
+                  buttonStyle={styles.loginButton}
+                  />
+            </View>
+          </KeyboardAwareScrollView>
+        </SafeAreaView>
+      
     )
   }
 }

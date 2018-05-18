@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Platform, StyleSheet, Text, View, ListView, TouchableHighlight, ScrollView } from 'react-native';
 import { List, ListItem, Button, Card, ButtonGroup, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { Dropdown } from 'react-native-material-dropdown';
 import ActionButton from 'react-native-action-button';
 import Logout from '../../Logout/Logout';
 import styles from '../../../Themes/LoginStyles';
@@ -13,7 +14,6 @@ class Dashboard extends Component {
 		this.state = {
 			orders: ds,
 			selectedIndex : 0,
-			sortingBy : "All",
 			data: [],
 		}
 	}
@@ -21,14 +21,9 @@ class Dashboard extends Component {
 
 	static navigationOptions = {
 		title: 'Dashboard',
-		//tabBarVisible : this.props.screenProps.user.is_Staff ? true : false,
-		//tabBarVisible : false,
-		headerLeft: <Icon 
-						name='refresh'
-						color='blue'
-						iconStyle={{padding: 10}}
-						onPress={() => this.setState(this.state)}
-						/>,
+		headerStyle: {
+			backgroundColor: '#8eb3fb'
+		  },
 		headerRight: (
 			<Logout />
 		),
@@ -71,18 +66,24 @@ class Dashboard extends Component {
 	renderRow(order, sectionId, rowId, hightlightRow) {
 		const { navigate } = this.props.navigation;		
 		return (
-			<ListItem roundAvatar 
-					key={order.transaction_id} 
-					title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
-					avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
-					subtitle={
-						<View style={{paddingLeft : 5}}>
-							<Text>Payment Method: {order.payment_method}</Text>
-							<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
-							<Text style={{fontWeight : 'bold', color : order.paid ? "green" : "red"}}>{ order.paid ? "Paid" : "Not Paid"}</Text>
-						</View>
-					}
-			/>
+			<TouchableHighlight 
+				underlayColor='blue'
+				//onPress = { () => this.props.navigation.navigate('OrderDetail', {orderDetail: order})}
+				>
+				<ListItem roundAvatar 
+						hideChevron
+						key={order.transaction_id} 
+						title={<Text style={{ padding: 5, fontSize : 17 , fontWeight : 'bold'}}>{order.created_on}</Text>}
+						avatar='https://www.designboom.com/wp-content/uploads/2016/07/patricia-piccinini-graham-transport-accident-commission-designboom-1800.jpg'
+						subtitle={
+							<View style={{paddingLeft : 5}}>
+								<Text>Payment Method: {order.payment_method}</Text>
+								<Text>Total: Php <Text style={{fontWeight : 'bold'}}> {order.total_cost}</Text></Text>
+								<Text style={{fontWeight : 'bold', color : order.paid ? "green" : "red"}}>{ order.paid ? "Paid" : "Not Paid"}</Text>
+							</View>
+						}
+				/>
+			</TouchableHighlight>
 		)
 	}
 
@@ -106,17 +107,14 @@ class Dashboard extends Component {
 		switch(filterBy){
 			case "all"		: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data),
-								sortingBy : "all",
 							});
 							break;
 			case "notPaid" 	: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === false)),
-								sortingBy : "not paid",
 							});
 							break;
 			case "paid"		: this.setState({
 								orders : this.state.orders.cloneWithRows(this.state.data.filter(item => item.paid === true)),
-								sortingBy : "paid",
 							});
 							break;
 		}
@@ -124,20 +122,17 @@ class Dashboard extends Component {
 	render() {
   		const { selectedIndex } = this.state.selectedIndex
 		return (
-			<View style={[styles.mainContainer,{flex:1}]}>
+			<View style={styles.mainContainer}>
+				<Dropdown
+					label="Filter"
+					containerStyle={{width: '40%', height: '7%'}}
+					data={
+						[{label: "All", value : 0},{label: "Not Paid", value : 1},{label: "Paid", value : 2}]
+						}
+					onChangeText={(value) => {
+						this.updateIndex(value)
+					}}/>
 				<ScrollView style={{flex:1}}>
-					<Text style={{fontSize : 32, marginLeft: 5, marginTop: 10, fontWeight:'bold'}}>Recent Orders</Text>
-					<ButtonGroup
-						onPress={this.updateIndex.bind(this)}
-						selectedIndex={selectedIndex}
-						buttons={['All', 'Not Paid', 'Paid']}
-						containerStyle={{height: 32}}
-						buttonStyle={{ backgroundColor : 'white' }}
-						selectedButtonStyle={{ backgroundColor : '#236EFF' }}
-						selectedTextStyle={{ color : 'white' }}
-						containerBorderRadius={20}
-					/>
-					<Text>Sorting by: {this.state.sortingBy}</Text>
 					<List containerStyle={{marginBottom: 20}}>
 						<ListView dataSource={this.state.orders} renderRow={this.renderRow.bind(this)}/>
 					</List>

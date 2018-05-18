@@ -19,6 +19,8 @@ const ApplicationStyles = {
       bottom: 0,
       right: 0,
       backgroundColor: '#FFE5E5',
+      flex: 1,
+      opacity: 0.90,
     },
     container: {
       flex: 1,
